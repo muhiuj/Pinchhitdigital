@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function CateringPage() {
   return (
     <section className="flex min-h-[90vh] items-center bg-ink-900">
@@ -18,12 +16,14 @@ export default function CateringPage() {
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/audit"
+          <a
+            href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 rounded-full bg-sun-400 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-ink-900 transition-colors hover:bg-sun-300"
           >
             Get your free audit <span>→</span>
-          </Link>
+          </a>
           <a
             href="#how-it-works"
             className="inline-flex items-center gap-2 border-b border-cream-50/40 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-cream-50 transition-colors hover:border-cream-50"
