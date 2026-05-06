@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   PHD canonical tokens (mirrors Claude Design system).
+   See CLAUDE.md for the rules of engagement.
+   ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --phd-teal-50: #f1faf9;
+  --phd-teal-100: #dcf2f1;
+  --phd-teal-200: #bbe5e3;
+  --phd-teal-300: #9ad7d4;
+  --phd-teal-400: #7ac7c4;
+  --phd-teal-500: #5fb4b1;
+  --phd-teal-600: #449b98;
+  --phd-teal-700: #2f7e7c;
+  --phd-teal-800: #1f5f5d;
+  --phd-teal-900: #143f3e;
+  --phd-teal-950: #0a2625;
+
+  --phd-ink-0: #ffffff;
+  --phd-ink-50: #f7f8f9;
+  --phd-ink-100: #eef0f2;
+  --phd-ink-200: #dde1e5;
+  --phd-ink-300: #c2c8cf;
+  --phd-ink-400: #95a0aa;
+  --phd-ink-500: #6b7681;
+  --phd-ink-600: #4b5560;
+  --phd-ink-700: #343c46;
+  --phd-ink-800: #20262e;
+  --phd-ink-900: #11161c;
+  --phd-ink-950: #070a0e;
+
+  --phd-cream-50: #fbf7f0;
+  --phd-cream-100: #f4ecdf;
+  --phd-cream-200: #ebe0cb;
+
+  --phd-sun-300: #f7d36a;
+  --phd-sun-400: #f4b942;
+  --phd-sun-500: #e29a14;
+
+  --phd-plum-500: #8c4a7a;
+  --phd-olive-500: #7a8b4a;
+  --phd-cobalt: #2f6df4;
+  --phd-coral: #e3654f;
+  --phd-mint: #4fd0a1;
+
+  --phd-success: #2f9e6b;
+  --phd-warning: #d18b1f;
+  --phd-danger: #c5462f;
+  --phd-info: #2f6df4;
+
+  --phd-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --phd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ------------------------------------------------------------------
+   Tailwind v4 theme bindings. Inline mode lets the var() reference
+   resolve at runtime so utilities like bg-sun-400 / text-ink-900 /
+   font-display map straight onto the canonical tokens above.
+   ------------------------------------------------------------------ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-teal-50: var(--phd-teal-50);
+  --color-teal-100: var(--phd-teal-100);
+  --color-teal-200: var(--phd-teal-200);
+  --color-teal-300: var(--phd-teal-300);
+  --color-teal-400: var(--phd-teal-400);
+  --color-teal-500: var(--phd-teal-500);
+  --color-teal-600: var(--phd-teal-600);
+  --color-teal-700: var(--phd-teal-700);
+  --color-teal-800: var(--phd-teal-800);
+  --color-teal-900: var(--phd-teal-900);
+  --color-teal-950: var(--phd-teal-950);
+
+  --color-ink-0: var(--phd-ink-0);
+  --color-ink-50: var(--phd-ink-50);
+  --color-ink-100: var(--phd-ink-100);
+  --color-ink-200: var(--phd-ink-200);
+  --color-ink-300: var(--phd-ink-300);
+  --color-ink-400: var(--phd-ink-400);
+  --color-ink-500: var(--phd-ink-500);
+  --color-ink-600: var(--phd-ink-600);
+  --color-ink-700: var(--phd-ink-700);
+  --color-ink-800: var(--phd-ink-800);
+  --color-ink-900: var(--phd-ink-900);
+  --color-ink-950: var(--phd-ink-950);
+
+  --color-cream-50: var(--phd-cream-50);
+  --color-cream-100: var(--phd-cream-100);
+  --color-cream-200: var(--phd-cream-200);
+
+  --color-sun-300: var(--phd-sun-300);
+  --color-sun-400: var(--phd-sun-400);
+  --color-sun-500: var(--phd-sun-500);
+
+  --color-coral: var(--phd-coral);
+  --color-plum: var(--phd-plum-500);
+  --color-olive: var(--phd-olive-500);
+  --color-cobalt: var(--phd-cobalt);
+  --color-mint: var(--phd-mint);
+
+  --font-sans: var(--font-manrope);
+  --font-body: var(--font-manrope);
+  --font-display: var(--font-bricolage);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains);
+
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-fade-in: fade-in 700ms var(--phd-ease);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--phd-cream-50);
+  color: var(--phd-ink-900);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
