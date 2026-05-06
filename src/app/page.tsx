@@ -129,7 +129,10 @@ const steps: Step[] = [
     n: "01",
     title: "Free 20-Min Revenue Audit",
     body: "We look at your digital footprint, your booking flow, and how you handle inbound inquiries. No pitch — just a clear picture of what's costing you.",
-    cta: { href: "/audit", label: "Book yours →" },
+    cta: {
+      href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
+      label: "Book yours →",
+    },
   },
   {
     n: "02",
@@ -192,12 +195,14 @@ export default function Home() {
               .
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/audit"
+              <a
+                href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
               >
                 Book a 30-min call <span>→</span>
-              </Link>
+              </a>
               <a
                 href="#what-we-build"
                 className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
@@ -326,12 +331,14 @@ export default function Home() {
                   {step.body}
                 </p>
                 {step.cta ? (
-                  <Link
+                  <a
                     href={step.cta.href}
+                    target={step.cta.href.startsWith("http") ? "_blank" : undefined}
+                    rel={step.cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="mt-6 inline-block font-display text-sm font-semibold text-teal-400 hover:underline"
                   >
                     {step.cta.label}
-                  </Link>
+                  </a>
                 ) : null}
               </div>
             ))}
@@ -385,6 +392,8 @@ export default function Home() {
               </ul>
               <a
                 href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-8 inline-block rounded-lg bg-sun-400 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-sun-300"
               >
                 Book a Free Audit →
@@ -659,6 +668,8 @@ export default function Home() {
             <div className="flex flex-col items-start gap-2 md:items-end">
               <a
                 href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-7 py-4 font-display text-sm font-bold text-white transition-colors hover:bg-ink-800"
               >
                 Book a 30-min call →

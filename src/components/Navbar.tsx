@@ -37,13 +37,15 @@ export function Navbar() {
           <span className="hidden font-mono text-[11px] uppercase tracking-[0.04em] text-ink-500 xl:inline">
             DFW · Dallas / Fort Worth
           </span>
-          <Link
-            href="/audit"
+          <a
+            href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-3 font-display text-[12px] font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900"
           >
             Book a 30-min call
             <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-          </Link>
+          </a>
         </div>
       </nav>
     </header>
