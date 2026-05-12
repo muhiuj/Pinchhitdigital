@@ -32,9 +32,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pinch Hit Digital — Get Found. Win Customers.",
+  title: "Restaurant Catering Websites | Pinch Hit Digital — Dallas–Fort Worth",
   description:
-    "Digital consulting for small business in Dallas–Fort Worth. Website, workflows, and automation — built for the people who run things.",
+    "Pinch Hit Digital helps Dallas–Fort Worth restaurants recover missed catering leads and automate follow-up. Get a free audit of your catering setup today.",
 };
 
 export default function RootLayout({
