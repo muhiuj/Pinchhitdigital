@@ -6,6 +6,7 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
+import { localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -50,6 +51,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
+        />
       </body>
     </html>
   );
