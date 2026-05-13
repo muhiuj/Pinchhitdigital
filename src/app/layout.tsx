@@ -6,6 +6,8 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
+import { PostHogPageView } from "@/components/PostHogPageView";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -49,8 +51,11 @@ export default function RootLayout({
       className={`${bricolage.variable} ${manrope.variable} ${instrumentSerif.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
+        <PostHogProvider>
+          <PostHogPageView />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </PostHogProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
