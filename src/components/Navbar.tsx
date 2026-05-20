@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "#how-it-works", label: "Process" },
-  { href: "#what-we-build", label: "Services" },
-  { href: "#benefits", label: "Benefits" },
-  { href: "#about", label: "About" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#how-it-works", label: "Process" },
+  { href: "/#what-we-build", label: "Services" },
+  { href: "/#benefits", label: "Benefits" },
+  { href: "/#about", label: "About" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/guides", label: "Free Guides" },
 ];
 

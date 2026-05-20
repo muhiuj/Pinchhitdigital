@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import GuideCard from "@/components/GuideCard";
 import GuideModal from "@/components/GuideModal";
@@ -88,12 +87,14 @@ export default function GuidesPage() {
             Book a free 20-min revenue audit. We&rsquo;ll show you exactly
             where the leaks are.
           </p>
-          <Link
-            href="/audit"
+          <a
+            href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-sun-400 px-6 py-3 font-display text-sm font-bold tracking-wide text-ink-900 transition-colors hover:bg-sun-300"
           >
             Book a Free Audit →
-          </Link>
+          </a>
         </section>
       </div>
 
