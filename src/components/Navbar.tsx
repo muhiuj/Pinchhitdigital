@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#benefits", label: "Benefits" },
   { href: "#about", label: "About" },
   { href: "#faq", label: "FAQ" },
+  { href: "/guides", label: "Free Guides" },
 ];
 
 export function Navbar() {
@@ -22,15 +23,22 @@ export function Navbar() {
         </Link>
 
         <div className="ml-6 hidden items-center gap-7 lg:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-display text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-700 transition-colors hover:text-ink-900"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            // Internal route links (starting with /) use next/link for
+            // client-side navigation; in-page anchors stay as plain <a> so
+            // smooth-scroll behavior keeps working.
+            const className =
+              "font-display text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-700 transition-colors hover:text-ink-900";
+            return link.href.startsWith("/") ? (
+              <Link key={link.href} href={link.href} className={className}>
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.href} href={link.href} className={className}>
+                {link.label}
+              </a>
+            );
+          })}
         </div>
 
         <div className="ml-auto flex items-center gap-4">
