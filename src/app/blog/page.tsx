@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/queries";
 export const metadata: Metadata = {
   title: "Blog | Pinch Hit Digital — DFW Restaurant Operators",
   description:
-    "Practical reads for DFW restaurant operators — no fluff. Catering revenue, automation, and operations insights from Pinch Hit Digital.",
+    "Practical reads for DFW businesses — no fluff. Catering revenue, automation, and operations insights from Pinch Hit Digital.",
 };
 
 // Revalidate the index every 60s so newly-published posts appear without a
@@ -26,7 +26,7 @@ export default async function BlogIndexPage() {
           <span className="font-serif italic text-teal-700">Field</span>.
         </h1>
         <p className="mt-3 max-w-xl text-lg text-ink-500">
-          Practical reads for DFW restaurant operators — no fluff.
+          Practical reads for DFW businesses — no fluff.
         </p>
 
         <hr className="mb-12 mt-10 border-t border-ink-200" />
