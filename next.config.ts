@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow next/image to optimize images served from Sanity's CDN.
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
   // PostHog reverse proxy. Routes analytics traffic through our own domain so
   // ad-blockers (which target *.i.posthog.com explicitly) can't drop events.
   // See https://posthog.com/docs/advanced/proxy/nextjs
