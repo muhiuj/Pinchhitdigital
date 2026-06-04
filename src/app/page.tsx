@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
 import { HeroSlider } from "@/components/HeroSlider";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const dfwChips = [
   "Dallas",
@@ -93,30 +94,6 @@ const benefits: Benefit[] = [
   },
 ];
 
-type FooterLink = { href: string; label: string };
-
-const siteLinks: FooterLink[] = [
-  { href: "#how-it-works", label: "Process" },
-  { href: "#what-we-build", label: "Services" },
-  { href: "#benefits", label: "Benefits" },
-  { href: "#about", label: "About" },
-  { href: "#faq", label: "FAQ" },
-];
-
-const companyLinks: FooterLink[] = [
-  { href: "/plans", label: "Plans" },
-  { href: "/newsletter", label: "Newsletter" },
-  { href: "#", label: "Everyday AI · YouTube" },
-  { href: "mailto:info@pinchhitdigital.com", label: "Contact" },
-];
-
-const dfwLines = [
-  "Dallas · Fort Worth",
-  "Plano · Frisco · McKinney",
-  "Arlington · Irving",
-  "Carrollton · Grapevine",
-];
-
 const websiteFeatures = [
   "Custom-built, not a template",
   "Google Business profile optimization",
@@ -152,7 +129,7 @@ export default function Home() {
       <header className="relative overflow-hidden bg-sun-400 px-6 pt-20 md:px-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] md:block"
+          className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] animate-slide-in-right md:block"
         >
           <Image
             src="/phd-logo.png"
@@ -253,7 +230,7 @@ export default function Home() {
       </section>
 
       <section id="problem" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+        <ScrollReveal className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div>
             <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
               The Problem
@@ -301,11 +278,11 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="how-it-works" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="text-center">
             <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
               The Process
@@ -349,11 +326,11 @@ export default function Home() {
               Most clients are up and running within 2 weeks of their audit.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="what-we-build" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
             What We Build
           </p>
@@ -434,11 +411,11 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="benefits" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
             Benefits
           </p>
@@ -484,11 +461,11 @@ export default function Home() {
               What partnering with a small, focused team actually feels like.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="featured-client" className="bg-cream-50 px-6 py-14 md:px-8 lg:py-20">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div className="relative overflow-hidden rounded-2xl">
               <Image
@@ -550,23 +527,16 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
-              <a
-                href="#"
-                className="mt-6 inline-flex items-center gap-1.5 border-b border-ink-900 pb-0.5 font-display text-[15px] font-semibold text-ink-900 transition-colors hover:border-teal-400 hover:text-teal-400"
-              >
-                Read the case study →
-              </a>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section
         id="about"
         className="border-t border-ink-200 bg-cream-50 px-6 py-14 md:px-8 lg:py-20"
       >
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
             <div className="flex flex-col">
               <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
@@ -637,13 +607,13 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <FAQ />
 
       <section id="contact" className="bg-sun-400 px-6 pt-14 pb-12 md:px-8 lg:pt-20 lg:pb-16">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="max-w-[900px]">
             <p className="mb-4 font-mono text-xs uppercase tracking-wider text-ink-900/50">
               Ready to start?
@@ -679,94 +649,9 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
-      <footer className="bg-ink-900 px-6 pt-16 pb-8 md:px-8">
-        <div className="mx-auto max-w-[1320px]">
-          <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-            <div>
-              <Image
-                src="/phd-logo.png"
-                alt="Pinch Hit Digital"
-                width={40}
-                height={40}
-                className="mb-3"
-              />
-              <p className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-teal-400">
-                Pinch Hit Digital
-              </p>
-              <p className="max-w-[28ch] font-sans text-sm leading-relaxed text-white/50">
-                Digital consulting for small business. Website, workflows,
-                and automation — built for the people who run things in
-                Dallas, Fort Worth, and the DFW Metroplex.
-              </p>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                Site
-              </p>
-              <ul className="space-y-3">
-                {siteLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-sans text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                Company
-              </p>
-              <ul className="space-y-3">
-                {companyLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-sans text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                DFW &amp; Nearby
-              </p>
-              <ul className="space-y-3">
-                {dfwLines.map((line) => (
-                  <li
-                    key={line}
-                    className="font-sans text-sm text-white/40"
-                  >
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center justify-between gap-3 md:flex-row">
-            <p className="font-mono text-xs uppercase tracking-wider text-white/25">
-              © 2026 Pinch Hit Digital · Dallas/Fort Worth, TX · All rights
-              reserved
-            </p>
-            <p className="font-mono text-xs uppercase tracking-wider text-white/25">
-              info@pinchhitdigital.com
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
