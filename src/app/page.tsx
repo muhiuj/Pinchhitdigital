@@ -93,30 +93,6 @@ const benefits: Benefit[] = [
   },
 ];
 
-type FooterLink = { href: string; label: string };
-
-const siteLinks: FooterLink[] = [
-  { href: "#how-it-works", label: "Process" },
-  { href: "#what-we-build", label: "Services" },
-  { href: "#benefits", label: "Benefits" },
-  { href: "#about", label: "About" },
-  { href: "#faq", label: "FAQ" },
-];
-
-const companyLinks: FooterLink[] = [
-  { href: "/plans", label: "Plans" },
-  { href: "/newsletter", label: "Newsletter" },
-  { href: "#", label: "Everyday AI · YouTube" },
-  { href: "mailto:info@pinchhitdigital.com", label: "Contact" },
-];
-
-const dfwLines = [
-  "Dallas · Fort Worth",
-  "Plano · Frisco · McKinney",
-  "Arlington · Irving",
-  "Carrollton · Grapevine",
-];
-
 const websiteFeatures = [
   "Custom-built, not a template",
   "Google Business profile optimization",
@@ -550,13 +526,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
-              <a
-                href="#"
-                className="mt-6 inline-flex items-center gap-1.5 border-b border-ink-900 pb-0.5 font-display text-[15px] font-semibold text-ink-900 transition-colors hover:border-teal-400 hover:text-teal-400"
-              >
-                Read the case study →
-              </a>
             </div>
           </div>
         </div>
@@ -682,91 +651,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-ink-900 px-6 pt-16 pb-8 md:px-8">
-        <div className="mx-auto max-w-[1320px]">
-          <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-            <div>
-              <Image
-                src="/phd-logo.png"
-                alt="Pinch Hit Digital"
-                width={40}
-                height={40}
-                className="mb-3"
-              />
-              <p className="mb-3 font-display text-sm font-bold uppercase tracking-wider text-teal-400">
-                Pinch Hit Digital
-              </p>
-              <p className="max-w-[28ch] font-sans text-sm leading-relaxed text-white/50">
-                Digital consulting for small business. Website, workflows,
-                and automation — built for the people who run things in
-                Dallas, Fort Worth, and the DFW Metroplex.
-              </p>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                Site
-              </p>
-              <ul className="space-y-3">
-                {siteLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-sans text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                Company
-              </p>
-              <ul className="space-y-3">
-                {companyLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-sans text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
-                DFW &amp; Nearby
-              </p>
-              <ul className="space-y-3">
-                {dfwLines.map((line) => (
-                  <li
-                    key={line}
-                    className="font-sans text-sm text-white/40"
-                  >
-                    {line}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center justify-between gap-3 md:flex-row">
-            <p className="font-mono text-xs uppercase tracking-wider text-white/25">
-              © 2026 Pinch Hit Digital · Dallas/Fort Worth, TX · All rights
-              reserved
-            </p>
-            <p className="font-mono text-xs uppercase tracking-wider text-white/25">
-              info@pinchhitdigital.com
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

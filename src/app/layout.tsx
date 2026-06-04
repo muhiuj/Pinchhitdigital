@@ -5,10 +5,14 @@ import {
   Instrument_Serif,
   JetBrains_Mono,
 } from "next/font/google";
+import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PostHogPageView } from "@/components/PostHogPageView";
 import { PostHogProvider } from "@/components/PostHogProvider";
-import { localBusinessSchema } from "@/lib/schema";
+import {
+  cateringServiceSchema,
+  professionalServiceSchema,
+} from "@/lib/schema";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -55,11 +59,18 @@ export default function RootLayout({
           <PostHogPageView />
           <Navbar />
           <main className="flex-1">{children}</main>
+          <Footer />
         </PostHogProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
+            __html: JSON.stringify(professionalServiceSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(cateringServiceSchema),
           }}
         />
       </body>
