@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
 import { HeroSlider } from "@/components/HeroSlider";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const dfwChips = [
   "Dallas",
@@ -128,7 +129,7 @@ export default function Home() {
       <header className="relative overflow-hidden bg-sun-400 px-6 pt-20 md:px-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] md:block"
+          className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] animate-slide-in-right md:block"
         >
           <Image
             src="/phd-logo.png"
@@ -229,7 +230,7 @@ export default function Home() {
       </section>
 
       <section id="problem" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+        <ScrollReveal className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div>
             <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
               The Problem
@@ -277,11 +278,11 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="how-it-works" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="text-center">
             <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
               The Process
@@ -325,11 +326,11 @@ export default function Home() {
               Most clients are up and running within 2 weeks of their audit.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="what-we-build" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
             What We Build
           </p>
@@ -410,11 +411,11 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="benefits" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
             Benefits
           </p>
@@ -460,11 +461,11 @@ export default function Home() {
               What partnering with a small, focused team actually feels like.
             </p>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section id="featured-client" className="bg-cream-50 px-6 py-14 md:px-8 lg:py-20">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div className="relative overflow-hidden rounded-2xl">
               <Image
@@ -528,14 +529,14 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section
         id="about"
         className="border-t border-ink-200 bg-cream-50 px-6 py-14 md:px-8 lg:py-20"
       >
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
             <div className="flex flex-col">
               <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
@@ -606,13 +607,13 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <FAQ />
 
       <section id="contact" className="bg-sun-400 px-6 pt-14 pb-12 md:px-8 lg:pt-20 lg:pb-16">
-        <div className="mx-auto max-w-[1320px]">
+        <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="max-w-[900px]">
             <p className="mb-4 font-mono text-xs uppercase tracking-wider text-ink-900/50">
               Ready to start?
@@ -648,7 +649,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
     </>

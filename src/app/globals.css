@@ -106,6 +106,10 @@
 
   --animate-marquee: marquee 30s linear infinite;
   --animate-fade-in: fade-in 700ms var(--phd-ease);
+  /* `both` fill mode applies the keyframe "from" state immediately so the
+     element starts off-screen before the animation begins — otherwise it
+     would briefly flash at its resting position on first paint. */
+  --animate-slide-in-right: slide-in-right 1200ms var(--phd-ease-out) both;
 }
 
 @keyframes marquee {
@@ -123,6 +127,24 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(70%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* The slide-in-right animation only animates transform — it preserves
+   whatever opacity the element already has via utility classes (e.g.,
+   the hero logo's opacity-[0.18]). Respects reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-in-right {
+    animation: none;
   }
 }
 
