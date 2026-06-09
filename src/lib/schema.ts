@@ -4,6 +4,11 @@
 // every page reinforces NAP + service consistency for local SEO. Additional
 // page-specific schemas (Article, FAQPage, BreadcrumbList) can be rendered
 // per-route alongside these two.
+//
+// plansSchema (below) is page-specific — it carries Offer pricing and only
+// belongs on /plans, so it is rendered from that page, NOT from layout.tsx.
+
+import { PLANS } from "@/lib/plans";
 
 // Common city-level service area used by both entities so the values stay
 // in sync if we add or drop a city.
@@ -73,3 +78,33 @@ export const cateringServiceSchema = {
     audienceType: "Independent restaurant operators",
   },
 } as const;
+
+// Page-specific schema for /plans. One Service entity per product, each with
+// an Offer carrying the "starting at" setup price in USD so Google can surface
+// pricing in local results. Prices are read from src/lib/plans.ts — bump them
+// there and this updates in lockstep. The setup fee is used as the Offer
+// anchor price; the recurring monthly is described in the Offer description
+// since a single Offer.price can only hold one figure.
+export const plansSchema = PLANS.map((plan) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: plan.name,
+  description: plan.tagline,
+  url: "https://www.pinchhitdigital.com/plans",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Pinch Hit Digital",
+    url: "https://www.pinchhitdigital.com",
+  },
+  areaServed: DFW_AREA_SERVED,
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "USD",
+    price: plan.setup,
+    description: `Starting at $${plan.setup.toLocaleString(
+      "en-US",
+    )} setup plus $${plan.monthly}/mo. Final scope set on a free audit.`,
+    url: "https://www.pinchhitdigital.com/plans",
+    availability: "https://schema.org/InStock",
+  },
+}));

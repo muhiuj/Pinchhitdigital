@@ -14,6 +14,7 @@ const siteLinks: LinkItem[] = [
   { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
+  { href: "/plans", label: "Plans" },
   { href: "/guides", label: "Free Guides" },
 ];
 
@@ -35,7 +36,6 @@ const contactItems: ContactItem[] = [
     external: true,
   },
   { label: "Newsletter", href: "/newsletter" },
-  { label: "Plans", href: "/plans" },
 ];
 
 const dfwLines = [
