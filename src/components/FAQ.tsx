@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -27,7 +28,8 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "Pricing depends on scope. The audit is always free. After that, you get a clear proposal — no packages that don't fit, no hidden setup fees.",
+    a: "Real starting prices are on the plans page — catering lead recovery, websites, and the bundle, with setup and monthly laid out. The audit is always free, and it sets your final scope.",
+    link: { href: "/plans", label: "See plans →" },
   },
 ];
 
@@ -74,6 +76,17 @@ export function FAQ() {
                     className="pb-2 pt-3 font-sans text-base leading-relaxed text-cream-50/70 md:text-[17px]"
                   >
                     {item.a}
+                    {item.link ? (
+                      <>
+                        {" "}
+                        <Link
+                          href={item.link.href}
+                          className="font-semibold text-teal-400 underline-offset-4 hover:underline"
+                        >
+                          {item.link.label}
+                        </Link>
+                      </>
+                    ) : null}
                   </p>
                 ) : null}
               </div>
