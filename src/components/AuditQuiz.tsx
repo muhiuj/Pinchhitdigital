@@ -9,6 +9,7 @@
  * never blocks the result. If it fails, the attendee still sees their score
  * (computed client-side) so the event experience never breaks.
  */
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 import {
   BOOKING_URL,
@@ -23,6 +24,7 @@ type Phase = "intro" | "quiz" | "form" | "results";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function AuditQuiz() {
+  const posthog = usePostHog();
   const [phase, setPhase] = useState<Phase>("intro");
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(
@@ -41,6 +43,12 @@ export default function AuditQuiz() {
   );
 
   const selectAnswer = (optionIndex: number) => {
+    const q = QUESTIONS[qIndex];
+    posthog?.capture("audit_question_answered", {
+      step: qIndex + 1,
+      question: q.shortLabel,
+      points: q.options[optionIndex].points,
+    });
     setAnswers((prev) => {
       const next = [...prev];
       next[qIndex] = optionIndex;
@@ -116,6 +124,7 @@ export default function AuditQuiz() {
       // Swallow — the attendee still gets their score below.
     }
 
+    posthog?.capture("audit_completed", { score, tier: tier.label });
     setResult({ score, tier });
     setSubmitting(false);
     setPhase("results");
@@ -177,6 +186,7 @@ export default function AuditQuiz() {
           <button
             type="button"
             onClick={() => {
+              posthog?.capture("audit_started");
               setPhase("quiz");
               setQIndex(0);
             }}
@@ -291,9 +301,15 @@ export default function AuditQuiz() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              posthog?.capture("audit_booking_clicked", {
+                score: result.score,
+                tier: result.tier.label,
+              })
+            }
             className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sun-400 px-8 py-4 font-display text-base font-bold tracking-wide text-ink-900 transition-colors hover:bg-sun-300"
           >
-            Book Your Free 20-Min Audit →
+            Book Your Free 30-Min Audit →
           </a>
           <p className="mt-4 font-sans text-sm text-cream-50/40">
             We&rsquo;ll bring your score to the call.
