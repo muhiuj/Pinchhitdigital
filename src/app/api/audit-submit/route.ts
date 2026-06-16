@@ -9,7 +9,11 @@ import { type NextRequest, NextResponse } from "next/server";
 // Any integration failure is logged but still returns success — the client
 // shows the attendee's score regardless.
 
-const TO_EMAIL = "jeremy@pinchhitdigital.com";
+// Lead-notification recipient. Defaults to the founder's domain inbox;
+// override with the RESEND_TO env var (e.g. a Gmail address) without a
+// redeploy. NOTE: an @pinchhitdigital.com address only receives once the
+// domain has MX / mail hosting (e.g. Google Workspace) configured.
+const DEFAULT_TO_EMAIL = "jeremy.muhiu@pinchhitdigital.com";
 const FROM_EMAIL = "PHD Audit <audit@pinchhitdigital.com>";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -113,6 +117,7 @@ export async function POST(req: NextRequest) {
   // 3. Resend email (optional) — via REST API so no extra dependency.
   const resendKey = process.env.RESEND_API_KEY;
   if (resendKey) {
+    const toEmail = process.env.RESEND_TO?.trim() || DEFAULT_TO_EMAIL;
     try {
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -122,7 +127,7 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           from: FROM_EMAIL,
-          to: [TO_EMAIL],
+          to: [toEmail],
           reply_to: email,
           subject: `New Catering Audit lead: ${restaurantName} (${score}/12 — ${tier})`,
           text: `New audit lead from the /audit page:\n\nName: ${firstName}\nRestaurant: ${restaurantName}\nPhone: ${phone}\nEmail: ${email}\n\nScore: ${score}/12 — ${tier}\n\nAnswers:\n${answersText}`,
