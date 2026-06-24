@@ -49,6 +49,24 @@
   --phd-danger: #c5462f;
   --phd-info: #2f6df4;
 
+  /* ----------------------------------------------------------------
+     /catering landing — dark-UI surface scale. The page runs a darker
+     canvas than ink-900 with several near-black section/card shades the
+     base ink ramp doesn't cover, plus iMessage-authentic bubble colors
+     for the channel mocks. Scoped tokens (not part of the brand ramp)
+     so the rest of the site is unaffected. teal/sun/coral/cream carry
+     their canonical meaning (system / action / missed / text).
+     ---------------------------------------------------------------- */
+  --phd-canvas: #0a0e12; /* darkest base canvas */
+  --phd-surface: #0c1116; /* alternating section bg */
+  --phd-surface-2: #0e1318; /* hub / inset */
+  --phd-card: #13171c; /* cards */
+  --phd-body: #b6bcc2; /* body text on dark */
+  --phd-body-dim: #8a9099; /* dimmer body text */
+  --phd-cream-2: #f3efe6; /* secondary cream */
+  --phd-ios-blue: #007aff; /* iMessage / SMS outbound bubble */
+  --phd-ios-gray: #c7c7cc; /* iMessage inbound bubble */
+
   --phd-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --phd-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -98,6 +116,17 @@
   --color-cobalt: var(--phd-cobalt);
   --color-mint: var(--phd-mint);
 
+  /* /catering dark-UI surface scale (see :root above). */
+  --color-canvas: var(--phd-canvas);
+  --color-surface: var(--phd-surface);
+  --color-surface-2: var(--phd-surface-2);
+  --color-card: var(--phd-card);
+  --color-body: var(--phd-body);
+  --color-body-dim: var(--phd-body-dim);
+  --color-cream-2: var(--phd-cream-2);
+  --color-ios-blue: var(--phd-ios-blue);
+  --color-ios-gray: var(--phd-ios-gray);
+
   --font-sans: var(--font-manrope);
   --font-body: var(--font-manrope);
   --font-display: var(--font-bricolage);
@@ -145,6 +174,135 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-slide-in-right {
     animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   /catering chaos→order hero — one continuous 7s loop (ported from the
+   Claude Design export). chaos: coral chips scattered (per-chip --phd-sx
+   /--phd-sy/--phd-r) + "unread" badge → settle: chips slide home + turn
+   teal, beams draw teal into the hub, hub glows/pulses, "Replied" chip
+   springs in → hold → loop. Pure CSS (transform/opacity/stroke only) so
+   it's compositor-smooth; all disabled under prefers-reduced-motion,
+   which freezes the resolved/settled state.
+   ------------------------------------------------------------------ */
+@keyframes phd-settle {
+  0%,
+  26% {
+    transform: translate(var(--phd-sx), var(--phd-sy)) rotate(var(--phd-r));
+  }
+  52%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+@keyframes phd-chiphue {
+  0%,
+  26% {
+    border-color: rgba(227, 106, 79, 0.55);
+    color: #e3654f;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    background: rgba(227, 106, 79, 0.07);
+  }
+  55%,
+  100% {
+    border-color: rgba(122, 199, 196, 0.65);
+    color: #7ac7c4;
+    box-shadow: 0 0 22px rgba(122, 199, 196, 0.22);
+    background: rgba(122, 199, 196, 0.08);
+  }
+}
+@keyframes phd-beamdraw {
+  0%,
+  28% {
+    stroke-dashoffset: 1;
+    opacity: 0.18;
+    stroke: #e3654f;
+  }
+  60%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+    stroke: #7ac7c4;
+  }
+}
+@keyframes phd-unreadfade {
+  0%,
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+@keyframes phd-hubglow {
+  0%,
+  38% {
+    box-shadow: 0 0 0 rgba(122, 199, 196, 0);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  66%,
+  100% {
+    box-shadow: 0 0 44px rgba(122, 199, 196, 0.42);
+    border-color: rgba(122, 199, 196, 0.7);
+  }
+}
+@keyframes phd-hubpulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  66% {
+    transform: scale(1.05);
+  }
+}
+@keyframes phd-confirmin {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  74%,
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phd-chip,
+  .phd-beam,
+  .phd-unread,
+  .phd-hub,
+  .phd-confirm {
+    animation: none !important;
+  }
+  /* Freeze the resolved/settled state for motion-averse users. */
+  .phd-chip {
+    transform: none !important;
+    border-color: rgba(122, 199, 196, 0.65) !important;
+    color: #7ac7c4 !important;
+    background: rgba(122, 199, 196, 0.08) !important;
+  }
+  .phd-beam {
+    stroke-dashoffset: 0 !important;
+    opacity: 0.9 !important;
+    stroke: #7ac7c4 !important;
+  }
+  .phd-unread {
+    opacity: 0 !important;
+  }
+  .phd-hub {
+    transform: none !important;
+    box-shadow: 0 0 44px rgba(122, 199, 196, 0.42) !important;
+    border-color: rgba(122, 199, 196, 0.7) !important;
+  }
+  .phd-confirm {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
   }
 }
 

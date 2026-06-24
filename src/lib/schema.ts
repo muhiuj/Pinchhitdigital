@@ -66,7 +66,7 @@ export const cateringServiceSchema = {
   serviceType: "Restaurant catering lead recovery",
   description:
     "Automated inquiry response, multi-step follow-up sequences, and monthly revenue reporting that turn missed catering inquiries into booked events for DFW restaurants.",
-  url: "https://www.pinchhitdigital.com/catering",
+  url: "https://www.pinchhitdigital.com/catering-lead-recovery",
   provider: {
     "@type": "ProfessionalService",
     name: "Pinch Hit Digital",

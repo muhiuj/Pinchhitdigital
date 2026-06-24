@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "How long does it take to get up and running?",
-    a: "Most clients see their systems live within two weeks of the free audit. The audit itself is 20 minutes.",
+    a: "Most clients see their systems live within two weeks of the free audit. The audit itself is 30 minutes.",
   },
   {
     q: "I already have a website — can you still help?",

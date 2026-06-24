@@ -84,7 +84,7 @@ export default function GuidesPage() {
             Ready to stop guessing?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-ink-400">
-            Book a free 20-min revenue audit. We&rsquo;ll show you exactly
+            Book a free 30-min revenue audit. We&rsquo;ll show you exactly
             where the leaks are.
           </p>
           <a

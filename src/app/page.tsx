@@ -104,7 +104,7 @@ const websiteFeatures = [
 const steps: Step[] = [
   {
     n: "01",
-    title: "Free 20-Min Revenue Audit",
+    title: "Free 30-Min Revenue Audit",
     body: "We look at your digital footprint, your booking flow, and how you handle inbound inquiries. No pitch — just a clear picture of what's costing you.",
     cta: {
       href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
@@ -368,12 +368,10 @@ export default function Home() {
                 ))}
               </ul>
               <a
-                href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/catering-lead-recovery"
                 className="mt-8 inline-block rounded-lg bg-sun-400 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-sun-300"
               >
-                Book a Free Audit →
+                See how the system works →
               </a>
             </div>
 
@@ -404,10 +402,10 @@ export default function Home() {
                 ))}
               </ul>
               <a
-                href="#how-it-works"
+                href="/plans"
                 className="mt-8 inline-block rounded-lg border-2 border-ink-900 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-ink-900 hover:text-white"
               >
-                See How It Works →
+                See plans &amp; pricing →
               </a>
             </div>
           </div>

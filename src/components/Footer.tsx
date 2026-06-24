@@ -8,13 +8,14 @@ import Image from "next/image";
 type LinkItem = { href: string; label: string };
 
 const siteLinks: LinkItem[] = [
+  { href: "/catering-lead-recovery", label: "Catering" },
+  { href: "/plans", label: "Plans" },
   { href: "/#how-it-works", label: "Process" },
   { href: "/#what-we-build", label: "Services" },
   { href: "/#benefits", label: "Benefits" },
   { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
-  { href: "/plans", label: "Plans" },
   { href: "/guides", label: "Free Guides" },
 ];
 
@@ -65,7 +66,7 @@ export function Footer() {
             </p>
             <p className="max-w-[28ch] font-sans text-sm leading-relaxed text-white/50">
               Digital consulting for small business. Website, workflows, and
-              automation — built for the people who run things in Dallas, Fort
+              automation, built for the people who run things in Dallas, Fort
               Worth, and the DFW Metroplex.
             </p>
           </div>

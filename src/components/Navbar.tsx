@@ -5,15 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+// Top-nav kept lean and product-forward: the real destination pages plus one
+// About anchor. The homepage-section anchors (Process, Services, Benefits, FAQ)
+// live in the footer and on the homepage, so the bar doesn't get crowded.
 const navLinks = [
-  { href: "/#how-it-works", label: "Process" },
-  { href: "/#what-we-build", label: "Services" },
-  { href: "/#benefits", label: "Benefits" },
-  { href: "/#about", label: "About" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/blog", label: "Blog" },
+  { href: "/catering-lead-recovery", label: "Catering" },
   { href: "/plans", label: "Plans" },
-  { href: "/guides", label: "Free Guides" },
+  { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
+  { href: "/#about", label: "About" },
 ];
 
 const CAL_URL = "https://cal.com/jeremy-muhiu-7gtclu/30min";
