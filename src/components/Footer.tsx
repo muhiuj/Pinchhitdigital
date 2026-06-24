@@ -36,6 +36,8 @@ const contactItems: ContactItem[] = [
     external: true,
   },
   { label: "Newsletter", href: "/newsletter" },
+  { label: "SMS Privacy", href: "/sms-privacy" },
+  { label: "SMS Terms", href: "/sms-terms" },
 ];
 
 const dfwLines = [
