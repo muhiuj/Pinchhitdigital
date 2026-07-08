@@ -26,6 +26,9 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
+// All four families stay preloaded. (Skipping preload on the accent fonts was
+// tested for LCP and rejected: the serif italic renders inside the hero H1,
+// and its late swap produced a 0.13 CLS, which costs more than the preload.)
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
@@ -33,9 +36,14 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
+// Mono renders only small eyebrow/label text, so its late swap doesn't move
+// layout (verified CLS 0); skipping its preload shortens the font chain ahead
+// of the hero-text LCP. The serif MUST stay preloaded (it's inside the H1;
+// un-preloading it measured CLS 0.133).
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -13,7 +13,14 @@ import {
 } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
 import { HeroSlider } from "@/components/HeroSlider";
+import { Proof } from "@/components/Proof";
 import ScrollReveal from "@/components/ScrollReveal";
+import { PLANS } from "@/lib/plans";
+
+// Price bands under the product cards read straight from src/lib/plans.ts so
+// the homepage can never drift from the numbers published on /plans.
+const cateringPlan = PLANS.find((p) => p.id === "catering");
+const websitePlan = PLANS.find((p) => p.id === "website");
 
 const dfwChips = [
   "Dallas",
@@ -24,21 +31,6 @@ const dfwChips = [
   "Irving",
   "Carrollton",
   "Grapevine",
-];
-
-const tickerItems = [
-  "Restaurants",
-  "Cafés",
-  "Caterers",
-  "Bakeries",
-  "Food Trucks",
-  "Bars & Taprooms",
-  "Custom Framing",
-  "Hardware Stores",
-  "Auto Shops",
-  "Dental Clinics",
-  "HVAC & Trades",
-  "Independent Pharmacies",
 ];
 
 type Step = {
@@ -131,11 +123,12 @@ export default function Home() {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] animate-slide-in-right md:block"
         >
+          {/* Decorative watermark, display:none on mobile — never preload it
+              (a preload here put 43KB in the mobile critical path). */}
           <Image
             src="/phd-logo.png"
             alt=""
             fill
-            priority
             sizes="60vw"
             className="object-contain object-right opacity-[0.18]"
           />
@@ -147,15 +140,13 @@ export default function Home() {
               <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full bg-teal-400 text-[11px] text-ink-900">
                 ✶
               </span>
-              Digital consulting for small business
+              Catering lead recovery · DFW restaurants
             </span>
 
-            <h1 className="mt-7 max-w-[14ch] text-balance font-display text-[64px] font-extrabold leading-[0.9] tracking-[-0.04em] text-ink-900 sm:text-7xl md:text-8xl lg:text-[168px]">
-              Get Found.
-              <br />
-              Win{" "}
-              <span className="font-serif text-[0.96em] font-normal italic tracking-[-0.02em] text-teal-700">
-                Customers
+            <h1 className="mt-7 max-w-[15ch] text-balance font-display text-[46px] font-extrabold leading-[0.95] tracking-[-0.03em] text-ink-900 sm:text-6xl md:text-7xl lg:text-[104px]">
+              Never lose another{" "}
+              <span className="font-serif text-[0.92em] font-normal italic tracking-[-0.02em] text-teal-700">
+                catering lead
               </span>
               .
             </h1>
@@ -163,29 +154,39 @@ export default function Home() {
 
           <div className="relative z-10 mt-14 grid items-end gap-10 border-t border-ink-900/20 pt-7 md:grid-cols-[1fr_auto] md:gap-16">
             <p className="max-w-[580px] text-[17px] leading-[1.5] text-ink-900/85 md:text-[19px]">
-              Website. Workflows. Automation. We handle the digital side so you
-              can focus on what you do best — restaurants, cafés, and small
-              businesses across{" "}
+              Pinch Hit Digital builds automated response systems for{" "}
               <span className="font-display font-bold">
-                Dallas, Fort Worth, and the DFW Metroplex
+                Dallas–Fort Worth restaurants
               </span>
-              .
+              , so every catering lead gets a real answer in under five minutes.
+              Built and run by the person who answers when you call.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
-              >
-                Book a 30-min call <span>→</span>
-              </a>
-              <a
-                href="#what-we-build"
-                className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
-              >
-                See services
-              </a>
+            <div className="flex flex-col items-start gap-3">
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
+                >
+                  Book a 30-min call <span>→</span>
+                </a>
+                <a
+                  href="#what-we-build"
+                  className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
+                >
+                  See services
+                </a>
+              </div>
+              <p className="font-sans text-[14px] text-ink-900/70">
+                Not ready to book?{" "}
+                <Link
+                  href="/audit"
+                  className="font-semibold text-ink-900 underline decoration-ink-900/40 underline-offset-4 transition-colors hover:decoration-ink-900"
+                >
+                  Take the free 60-second Catering Revenue Audit first.
+                </Link>
+              </p>
             </div>
           </div>
 
@@ -210,24 +211,6 @@ export default function Home() {
           </div>
         </div>
       </header>
-
-      <section className="overflow-hidden bg-ink-900 py-6 text-cream-50">
-        <div className="flex w-max animate-marquee items-center whitespace-nowrap">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex shrink-0 items-center gap-14 pr-14" aria-hidden={copy === 1}>
-              {tickerItems.map((item) => (
-                <span
-                  key={`${copy}-${item}`}
-                  className="inline-flex items-center gap-14 font-display text-base font-bold tracking-[0.04em]"
-                >
-                  {item}
-                  <span className="text-sun-400">✶</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section id="problem" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
         <ScrollReveal className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
@@ -256,25 +239,23 @@ export default function Home() {
           <div>
             <div className="rounded-2xl bg-ink-900 p-8">
               <p className="mb-2 font-mono text-xs uppercase tracking-wider text-ink-400">
-                Revenue Impact
+                What the research shows
               </p>
               <div className="font-display text-7xl font-extrabold leading-none text-sun-400">
-                60%
+                43%
               </div>
               <p className="mt-2 font-body text-base text-ink-100/80">
-                of catering and service inquiries get no response within 24
-                hours.
+                of restaurant calls go unanswered during peak hours, per
+                independent studies{" "}
+                <span className="whitespace-nowrap">(Hostie AI, 2025)</span>.
               </p>
               <hr className="my-6 border-t border-ink-100/10" />
               <div className="font-display text-7xl font-extrabold leading-none text-sun-400">
-                2&ndash;3&times;
+                21&times;
               </div>
               <p className="mt-2 font-body text-base text-ink-100/80">
-                revenue gap between reactive and proactive operators &mdash;
-                once they run the numbers.
-              </p>
-              <p className="mt-6 font-mono text-xs text-ink-100/30">
-                PHD Revenue Audit findings &middot; DFW 2025
+                more likely to qualify: leads contacted within 5 minutes
+                versus leads that wait 30 (Lead Response Management study).
               </p>
             </div>
           </div>
@@ -373,6 +354,16 @@ export default function Home() {
               >
                 See how the system works →
               </a>
+              {cateringPlan && (
+                <p className="mt-4 font-sans text-[14px] text-white/70">
+                  <Link
+                    href="/plans"
+                    className="underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
+                  >
+                    {cateringPlan.priceLine}
+                  </Link>
+                </p>
+              )}
             </div>
 
             <div className="rounded-2xl border border-ink-900/10 bg-white p-10">
@@ -407,8 +398,32 @@ export default function Home() {
               >
                 See plans &amp; pricing →
               </a>
+              {websitePlan && (
+                <p className="mt-4 font-sans text-[14px] text-ink-700">
+                  <Link
+                    href="/plans"
+                    className="underline decoration-ink-900/30 underline-offset-4 transition-colors hover:decoration-ink-900"
+                  >
+                    {websitePlan.priceLine}
+                  </Link>
+                </p>
+              )}
             </div>
           </div>
+
+          {/* The generalist truth, once, as one calm sentence (flagship-first,
+              generalist-second). */}
+          <p className="mt-10 max-w-[72ch] font-sans text-[16px] leading-relaxed text-ink-700">
+            The same systems work for any owner-operated business where
+            inquiries arrive faster than a small team can answer them.{" "}
+            <Link
+              href="/plans"
+              className="font-semibold text-ink-900 underline decoration-ink-900/30 underline-offset-4 transition-colors hover:decoration-ink-900"
+            >
+              We build them for professional services and local service
+              businesses across DFW as well.
+            </Link>
+          </p>
         </ScrollReveal>
       </section>
 
@@ -462,73 +477,9 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      <section id="featured-client" className="bg-cream-50 px-6 py-14 md:px-8 lg:py-20">
-        <ScrollReveal className="mx-auto max-w-[1320px]">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <div className="relative overflow-hidden rounded-2xl">
-              <Image
-                src="/cardinal-frames.png"
-                alt="Jeremy Muhiu with the Cardinal Frames team — Carrollton, TX"
-                width={640}
-                height={480}
-                className="h-full w-full rounded-2xl object-cover"
-              />
-              <span className="absolute left-4 top-4 inline-block rounded-full bg-sun-400 px-3 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-900">
-                Featured Client
-              </span>
-            </div>
-
-            <div>
-              <h2 className="font-display text-3xl font-extrabold leading-tight text-ink-900 md:text-5xl">
-                Cardinal Frames
-                <br />
-                &mdash;{" "}
-                <span className="font-serif italic text-coral">
-                  Carrollton, TX
-                </span>
-                .
-              </h2>
-
-              <p className="mt-6 max-w-[48ch] font-sans text-[16px] leading-relaxed text-ink-700">
-                Every order is a one-off conversation. We&rsquo;re building
-                the system that turns walk-in chats into clean estimates,
-                scheduled pickups, and a calendar the team can trust &mdash;
-                without losing the personal touch that makes the shop the
-                shop.
-              </p>
-
-              <hr className="my-6 border-t border-ink-900/10" />
-
-              <div className="flex flex-wrap gap-8">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-wider text-ink-400">
-                    Industry
-                  </p>
-                  <p className="mt-1 font-display text-[15px] font-semibold text-ink-900">
-                    Custom Framing
-                  </p>
-                </div>
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-wider text-ink-400">
-                    Engagement
-                  </p>
-                  <p className="mt-1 font-display text-[15px] font-semibold text-ink-900">
-                    In progress
-                  </p>
-                </div>
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-wider text-ink-400">
-                    Location
-                  </p>
-                  <p className="mt-1 font-display text-[15px] font-semibold text-ink-900">
-                    Carrollton, TX
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
+      {/* Proof slot — invisible until a real restaurant testimonial exists.
+          Pass a testimonial prop to render it (see src/components/Proof.tsx). */}
+      <Proof />
 
       <section
         id="about"

@@ -20,6 +20,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/audit`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/guides`,
       lastModified,
       changeFrequency: "monthly",
@@ -32,9 +38,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      // Pricing changes more often than "yearly" signals to Googlebot.
       url: `${baseUrl}/plans`,
       lastModified,
-      changeFrequency: "yearly",
+      changeFrequency: "monthly",
       priority: 0.5,
     },
     {
