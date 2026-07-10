@@ -19,9 +19,9 @@ const siteLinks: LinkItem[] = [
   { href: "/guides", label: "Free Guides" },
 ];
 
-// Per option (b): jeremy.muhiu@ is the founder/direct contact; info@ stays
-// as the general inbox alias. Both shown so visitors can choose, and cal.com
-// surfaces the booking flow without forcing them back to the nav.
+// One email only, reader-facing: jeremy.muhiu@ (the founder/direct contact).
+// It reinforces the "one person who answers" promise; info@ was removed from
+// all rendered copy per the consistency rule.
 type ContactItem = {
   label: string;
   href: string;
@@ -30,9 +30,8 @@ type ContactItem = {
 
 const contactItems: ContactItem[] = [
   { label: "Email Jeremy", href: "mailto:jeremy.muhiu@pinchhitdigital.com" },
-  { label: "General inbox", href: "mailto:info@pinchhitdigital.com" },
   {
-    label: "Book a 30-min call",
+    label: "Book a 30-minute call",
     href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
     external: true,
   },
@@ -129,7 +128,7 @@ export function Footer() {
             reserved
           </p>
           <p className="font-mono text-xs uppercase tracking-wider text-white/25">
-            info@pinchhitdigital.com
+            jeremy.muhiu@pinchhitdigital.com
           </p>
         </div>
       </div>

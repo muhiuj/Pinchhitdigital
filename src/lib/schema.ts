@@ -32,9 +32,10 @@ export const professionalServiceSchema = {
   "@type": ["ProfessionalService", "LocalBusiness"],
   name: "Pinch Hit Digital",
   url: "https://www.pinchhitdigital.com",
-  // General inbox stays here as the business contact. Direct founder
-  // contact is on the founder Person entity below.
-  email: "info@pinchhitdigital.com",
+  // One email everywhere (consistency rule): the founder address is the
+  // business contact. info@ was removed from all reader-facing surfaces.
+  email: "jeremy.muhiu@pinchhitdigital.com",
+  sameAs: ["https://cal.com/jeremy-muhiu-7gtclu/30min"],
   description:
     "Catering lead recovery and digital systems for DFW restaurants and small businesses. Websites, automation, and inquiry workflows built for owner-operators across Dallas–Fort Worth.",
   founder: {

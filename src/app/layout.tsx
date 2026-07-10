@@ -47,9 +47,10 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // Meta title is locked per the homepage brief; do not reword.
   title: "Restaurant Catering Websites | Pinch Hit Digital — Dallas–Fort Worth",
   description:
-    "Pinch Hit Digital helps Dallas–Fort Worth restaurants recover missed catering leads and automate follow-up. Get a free audit of your catering setup today.",
+    "Pinch Hit Digital helps Dallas–Fort Worth restaurants recover missed catering leads and automate follow-up. Start with the free 30-minute Revenue Audit.",
 };
 
 export default function RootLayout({

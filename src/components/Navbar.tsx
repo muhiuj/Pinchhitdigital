@@ -54,7 +54,7 @@ export function Navbar() {
           href="/"
           onClick={close}
           className="flex items-center gap-2.5"
-          aria-label="Pinch Hit Digital — Home"
+          aria-label="Pinch Hit Digital home"
         >
           <Image src="/phd-logo.png" alt="" width={28} height={28} priority />
           <span className="hidden h-5 w-px bg-teal-400 sm:inline-block" />
@@ -90,7 +90,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="group hidden items-center gap-2 rounded-full bg-ink-900 px-4 py-3 font-display text-[12px] font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900 lg:inline-flex"
           >
-            Book a 30-min call
+            Book a 30-minute call
             <span className="transition-transform duration-200 group-hover:translate-x-0.5">
               →
             </span>
@@ -126,7 +126,7 @@ export function Navbar() {
               onClick={close}
               className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-4 font-display text-sm font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900"
             >
-              Book a 30-min call
+              Book a 30-minute call
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">
                 →
               </span>

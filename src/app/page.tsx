@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,6 +17,13 @@ import { HeroSlider } from "@/components/HeroSlider";
 import { Proof } from "@/components/Proof";
 import ScrollReveal from "@/components/ScrollReveal";
 import { PLANS } from "@/lib/plans";
+
+// Title/description inherit from layout.tsx; the canonical must be the www
+// origin (a non-www → www redirect exists, and the canonical prevents any
+// split-signal risk).
+export const metadata: Metadata = {
+  alternates: { canonical: "https://www.pinchhitdigital.com/" },
+};
 
 // Price bands under the product cards read straight from src/lib/plans.ts so
 // the homepage can never drift from the numbers published on /plans.
@@ -57,12 +65,12 @@ const benefits: Benefit[] = [
   {
     icon: Zap,
     title: "Inquiries answered in minutes",
-    body: "Your follow-up runs automatically — day or night. No manual checking, no leads going cold while you're in the weeds.",
+    body: "Your follow-up runs automatically, day or night. No manual checking, no leads going cold while you're in the weeds.",
   },
   {
     icon: MapPin,
     title: "Built for DFW, not for everyone",
-    body: "We know this market. Your site is optimized for Dallas–Fort Worth local search from day one — not adjusted from a national template.",
+    body: "We know this market. Your site is optimized for Dallas–Fort Worth local search from day one, not adjusted from a national template.",
   },
   {
     icon: UserCheck,
@@ -96,8 +104,8 @@ const websiteFeatures = [
 const steps: Step[] = [
   {
     n: "01",
-    title: "Free 30-Min Revenue Audit",
-    body: "We look at your digital footprint, your booking flow, and how you handle inbound inquiries. No pitch — just a clear picture of what's costing you.",
+    title: "Free 30-Minute Revenue Audit",
+    body: "We look at your digital footprint, your booking flow, and how you handle inbound inquiries. No pitch, just a clear picture of what's costing you.",
     cta: {
       href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
       label: "Book yours →",
@@ -169,7 +177,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
                 >
-                  Book a 30-min call <span>→</span>
+                  Book a 30-minute call <span>→</span>
                 </a>
                 <a
                   href="#what-we-build"
@@ -223,8 +231,8 @@ export default function Home() {
             </h2>
             <p className="mt-6 max-w-[52ch] font-body text-[17px] leading-relaxed text-ink-700">
               Most DFW independent businesses lose revenue before the week is
-              over &mdash; not because the work is bad, but because the inquiry
-              sat in an inbox for 48 hours. By then, the client booked someone
+              over, not because the work is bad, but because the inquiry sat
+              in an inbox for 48 hours. By then, the customer booked someone
               else.
             </p>
             <hr className="my-8 border-t border-ink-900/20" />
@@ -333,7 +341,7 @@ export default function Home() {
               <p className="mt-4 font-sans text-[15px] leading-relaxed text-white/70">
                 Automated inquiry response, multi-step follow-up sequences,
                 and monthly revenue reporting. Built for DFW operators with
-                private event space &mdash; restaurants, venues, and caterers.
+                private event space: restaurants, venues, and caterers.
               </p>
               <ul className="mt-6 flex flex-col gap-3">
                 {flagshipFeatures.map((feature) => (
@@ -376,8 +384,8 @@ export default function Home() {
               <p className="mt-4 font-sans text-[15px] leading-relaxed text-ink-700">
                 A custom-built website that ranks in local search, reflects
                 your brand, and turns visitors into customers. Includes Google
-                Business optimization and ongoing updates &mdash; no
-                templates, no DIY.
+                Business optimization and ongoing updates. No templates, no
+                DIY.
               </p>
               <ul className="mt-6 flex flex-col gap-3">
                 {websiteFeatures.map((feature) => (
@@ -506,14 +514,14 @@ export default function Home() {
                 <p className="font-sans text-[16px] leading-relaxed text-ink-700">
                   I spent years building systems for companies with dedicated
                   IT departments and automation budgets. Most DFW independent
-                  operators don&rsquo;t have that &mdash; but there&rsquo;s no
-                  reason they shouldn&rsquo;t.
+                  operators don&rsquo;t have that. There&rsquo;s no reason
+                  they shouldn&rsquo;t.
                 </p>
                 <p className="font-sans text-[16px] leading-relaxed text-ink-700">
                   Pinch Hit Digital exists to close that gap. No agency
                   overhead, no account manager you&rsquo;ll never meet, no
                   jargon. You get the systems the big operators take for
-                  granted &mdash; built for your business, explained in plain
+                  granted: built for your business, explained in plain
                   English, and supported directly by the person who built
                   them.
                 </p>
@@ -526,7 +534,7 @@ export default function Home() {
               <div className="mt-6 flex items-center gap-3">
                 <hr className="w-8 border-t border-ink-900/20" />
                 <p className="font-mono text-xs uppercase tracking-wider text-ink-400">
-                  Jeremy Muhiu &mdash; Founder, Pinch Hit Digital
+                  Jeremy Muhiu &middot; Founder, Pinch Hit Digital
                 </p>
               </div>
 
@@ -549,7 +557,7 @@ export default function Home() {
             <div>
               <Image
                 src="/founder.jpg"
-                alt="Jeremy Muhiu — Founder, Pinch Hit Digital"
+                alt="Jeremy Muhiu, Founder of Pinch Hit Digital"
                 width={560}
                 height={640}
                 className="h-full w-full rounded-2xl object-cover object-top"
@@ -579,7 +587,7 @@ export default function Home() {
 
           <div className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-[44ch] font-sans text-[16px] leading-relaxed text-ink-900/70">
-              Thirty minutes — on the phone or over coffee anywhere in DFW.
+              30 minutes, on the phone or over coffee anywhere in DFW.
               We&rsquo;ll listen, look at your numbers, and tell you whether
               we&rsquo;re the right shop for the job, even if the honest
               answer is no.
@@ -591,7 +599,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-7 py-4 font-display text-sm font-bold text-white transition-colors hover:bg-ink-800"
               >
-                Book a 30-min call →
+                Book a 30-minute call →
               </a>
               <p className="font-mono text-xs uppercase tracking-wider text-ink-900/40">
                 It&rsquo;s 100% free.

@@ -8,7 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 const faqs = [
   {
     q: "Do I need to know anything about tech?",
-    a: "No. We handle all of it — setup, integrations, and ongoing management. You approve the work and the direction; we build and maintain everything else.",
+    a: "No. We handle all of it: setup, integrations, and ongoing management. You approve the work and the direction; we build and maintain everything else.",
   },
   {
     q: "What kinds of businesses do you work with?",
@@ -19,7 +19,7 @@ const faqs = [
     a: "Most clients see their systems live within two weeks of the free audit. The audit itself is 30 minutes.",
   },
   {
-    q: "I already have a website — can you still help?",
+    q: "I already have a website. Can you still help?",
     a: "Yes. Most clients come to us with an existing site. We start with the audit to find the highest-leverage gaps, which is often inquiry response time, not the website itself.",
   },
   {
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "Real starting prices are on the plans page — catering lead recovery, websites, and the bundle, with setup and monthly laid out. The audit is always free, and it sets your final scope.",
+    a: "Real starting prices are on the plans page: catering lead recovery, websites, and the bundle, with setup and monthly laid out. The audit is always free, and it sets your final scope.",
     link: { href: "/plans", label: "See plans →" },
   },
 ];
