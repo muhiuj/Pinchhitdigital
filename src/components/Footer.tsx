@@ -17,6 +17,7 @@ const siteLinks: LinkItem[] = [
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
   { href: "/guides", label: "Free Guides" },
+  { href: "/build-it-live", label: "Webinars" },
 ];
 
 // One email only, reader-facing: jeremy.muhiu@ (the founder/direct contact).

@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/guides", label: "Guides" },
   { href: "/blog", label: "Blog" },
   { href: "/#about", label: "About" },
+  { href: "/build-it-live", label: "Webinars" },
 ];
 
 const CAL_URL = "https://cal.com/jeremy-muhiu-7gtclu/30min";
