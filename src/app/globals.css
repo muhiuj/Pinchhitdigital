@@ -306,6 +306,77 @@
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Rainbow attention ring (Webinars nav link). Adapted from the Magic UI
+   RainbowButton technique: a multi-color gradient slid across
+   background-position. Rendered as a border-only ring via the mask
+   trick (padding-box XOR), cycles 4 times (2s each), then fades out
+   over the final cycle and stays gone (both animations run once per
+   mount, so the mobile menu replays it on open). */
+@keyframes phd-rainbow-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes phd-rainbow-out {
+  0%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.phd-rainbow-ring {
+  position: relative;
+  border-radius: 9999px;
+}
+
+.phd-rainbow-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* ring thickness */
+  /* First and last stop match so the 200% slide loops seamlessly. */
+  background: linear-gradient(
+    90deg,
+    var(--phd-teal-400),
+    var(--phd-sun-400),
+    var(--phd-coral),
+    var(--phd-cobalt),
+    var(--phd-mint),
+    var(--phd-teal-400)
+  );
+  background-size: 200% 100%;
+  /* Knock out the center so only the border band paints. */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  animation:
+    phd-rainbow-slide 2s linear 4,
+    phd-rainbow-out 8s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phd-rainbow-ring::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;

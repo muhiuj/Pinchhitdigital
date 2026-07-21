@@ -8,13 +8,16 @@ import { useEffect, useState } from "react";
 // Top-nav kept lean and product-forward: the real destination pages plus one
 // About anchor. The homepage-section anchors (Process, Services, Benefits, FAQ)
 // live in the footer and on the homepage, so the bar doesn't get crowded.
+// `highlight` draws the one-shot rainbow attention ring (see globals.css:
+// .phd-rainbow-ring) around a link on mount — currently the Webinars link,
+// to pull eyes to the new Build It Live page.
 const navLinks = [
   { href: "/catering-lead-recovery", label: "Catering" },
   { href: "/plans", label: "Plans" },
   { href: "/guides", label: "Guides" },
   { href: "/blog", label: "Blog" },
   { href: "/#about", label: "About" },
-  { href: "/build-it-live", label: "Webinars" },
+  { href: "/build-it-live", label: "Webinars", highlight: true },
 ];
 
 const CAL_URL = "https://cal.com/jeremy-muhiu-7gtclu/30min";
@@ -66,17 +69,20 @@ export function Navbar() {
 
         {/* Desktop nav links — hidden below lg */}
         <div className="ml-6 hidden items-center gap-7 lg:flex">
-          {navLinks.map((link) =>
-            link.href.startsWith("/") ? (
-              <Link key={link.href} href={link.href} className={desktopLinkClass}>
+          {navLinks.map((link) => {
+            const cls = link.highlight
+              ? `${desktopLinkClass} phd-rainbow-ring -mx-1 px-3 py-1.5`
+              : desktopLinkClass;
+            return link.href.startsWith("/") ? (
+              <Link key={link.href} href={link.href} className={cls}>
                 {link.label}
               </Link>
             ) : (
-              <a key={link.href} href={link.href} className={desktopLinkClass}>
+              <a key={link.href} href={link.href} className={cls}>
                 {link.label}
               </a>
-            ),
-          )}
+            );
+          })}
         </div>
 
         <div className="ml-auto flex items-center gap-3">
@@ -133,15 +139,19 @@ export function Navbar() {
               </span>
             </a>
 
-            {/* Nav links — stacked, big tap targets */}
+            {/* Nav links — stacked, big tap targets. The menu mounts on
+                open, so a highlighted link replays its ring each open. */}
             <div className="mt-6 space-y-1 border-t border-ink-200 pt-4">
-              {navLinks.map((link) =>
-                link.href.startsWith("/") ? (
+              {navLinks.map((link) => {
+                const cls = link.highlight
+                  ? `${mobileLinkClass} phd-rainbow-ring px-4`
+                  : mobileLinkClass;
+                return link.href.startsWith("/") ? (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={close}
-                    className={mobileLinkClass}
+                    className={cls}
                   >
                     {link.label}
                   </Link>
@@ -150,12 +160,12 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={close}
-                    className={mobileLinkClass}
+                    className={cls}
                   >
                     {link.label}
                   </a>
-                ),
-              )}
+                );
+              })}
             </div>
 
             <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.04em] text-ink-500">
