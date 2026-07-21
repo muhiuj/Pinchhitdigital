@@ -1,15 +1,20 @@
+import { Client } from "@notionhq/client";
 import { type NextRequest, NextResponse } from "next/server";
+import { NEXT_SESSION } from "@/lib/webinars";
 
 // Build It Live registration intake. The site stays thin: this route
-// validates, then forwards the blueprint payload to the n8n webhook (WF1),
-// which owns Attio, the confirmation email + .ics, and every reminder.
+// validates, writes the prospect row to Notion, then forwards the blueprint
+// payload to the n8n webhook (WF1), which owns the confirmation email +
+// .ics and every reminder.
 //
 // Delivery contract (never lose a registrant to a red banner):
 //   1. Always console.log the full registrant (shows in Vercel runtime logs).
-//   2. If N8N_WEBHOOK_URL is set, forward with the x-phd-secret header.
-//   3. On webhook failure, log + best-effort Resend fallback email, and STILL
-//      return 200 to the browser. With no webhook configured (pre-launch
-//      mock), the log line IS the capture.
+//   2. If NOTION_WEBINAR_SIGNUPS_DB_ID is set, write a "Webinar Signups"
+//      row (best-effort; failures logged, never surfaced).
+//   3. If N8N_WEBHOOK_URL is set, forward with the x-phd-secret header.
+//      On webhook failure, log + best-effort Resend fallback email, and
+//      STILL return 200 to the browser. With no webhook configured
+//      (pre-launch mock), the log + Notion row ARE the capture.
 
 const DEFAULT_TO_EMAIL = "jeremy.muhiu@pinchhitdigital.com";
 const FROM_EMAIL = "PHD Build It Live <audit@pinchhitdigital.com>";
@@ -35,6 +40,40 @@ type WebhookPayload = {
   phone_verified: boolean;
   source: "site";
 };
+
+// Session key for the Notion Session select, e.g. "2026-08" from
+// "2026-08-build-it-live".
+const SESSION_KEY = NEXT_SESSION.id.slice(0, 7);
+
+async function writeNotionRow(payload: WebhookPayload) {
+  const notionKey = process.env.NOTION_API_KEY;
+  const dbId = process.env.NOTION_WEBINAR_SIGNUPS_DB_ID;
+  if (!notionKey || !dbId) return;
+  try {
+    const notion = new Client({ auth: notionKey });
+    await notion.pages.create({
+      parent: { database_id: dbId },
+      properties: {
+        Name: { title: [{ text: { content: payload.first_name } }] },
+        Email: { email: payload.email },
+        ...(payload.phone ? { Phone: { phone_number: payload.phone } } : {}),
+        Restaurant: {
+          rich_text: payload.restaurant
+            ? [{ text: { content: payload.restaurant } }]
+            : [],
+        },
+        "SMS Consent": { checkbox: payload.sms_consent },
+        "Phone Verified": { checkbox: payload.phone_verified },
+        Status: { select: { name: "Registered" } },
+        Session: { select: { name: SESSION_KEY } },
+        Source: { select: { name: "Site" } },
+        "Registered At": { date: { start: new Date().toISOString() } },
+      },
+    });
+  } catch (error) {
+    console.error("webinar-register: Notion write failed:", error);
+  }
+}
 
 async function notifyFallback(payload: WebhookPayload, reason: string) {
   const resendKey = process.env.RESEND_API_KEY;
@@ -116,13 +155,16 @@ export async function POST(req: NextRequest) {
   // 1. Always log: guaranteed capture in Vercel runtime logs.
   console.log("webinar-register registrant:", payload);
 
+  // 2. Notion "Webinar Signups" row (best-effort, env-guarded).
+  await writeNotionRow(payload);
+
   const webhookUrl = process.env.N8N_WEBHOOK_URL;
   if (!webhookUrl) {
-    console.log("webinar-register: N8N_WEBHOOK_URL not set; logged only.");
+    console.log("webinar-register: N8N_WEBHOOK_URL not set; skipping forward.");
     return NextResponse.json({ ok: true });
   }
 
-  // 2. Forward to n8n WF1. Short timeout so a slow webhook never stalls the
+  // 3. Forward to n8n WF1. Short timeout so a slow webhook never stalls the
   // visitor; failures fall through to the fallback notification.
   try {
     const res = await fetch(webhookUrl, {
@@ -142,6 +184,6 @@ export async function POST(req: NextRequest) {
     await notifyFallback(payload, error instanceof Error ? error.message : "unknown");
   }
 
-  // 3. The browser always hears yes.
+  // 4. The browser always hears yes.
   return NextResponse.json({ ok: true });
 }
