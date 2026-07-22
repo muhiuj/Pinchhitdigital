@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 import { type NextRequest, NextResponse } from "next/server";
-import { NEXT_SESSION } from "@/lib/webinars";
+import { getLiveSession, resolveDataSourceId } from "@/lib/webinars-live";
 
 // Build It Live registration intake. The site stays thin: this route
 // validates, writes the prospect row to Notion, then forwards the blueprint
@@ -41,16 +41,53 @@ type WebhookPayload = {
   source: "site";
 };
 
-// Session key for the Notion Session select, e.g. "2026-08" from
-// "2026-08-build-it-live".
-const SESSION_KEY = NEXT_SESSION.id.slice(0, 7);
-
 async function writeNotionRow(payload: WebhookPayload) {
   const notionKey = process.env.NOTION_API_KEY;
   const dbId = process.env.NOTION_WEBINAR_SIGNUPS_DB_ID;
   if (!notionKey || !dbId) return;
   try {
     const notion = new Client({ auth: notionKey });
+    const sessionKey = (await getLiveSession()).sessionKey;
+
+    // Dedupe: same email + same session updates the existing row instead of
+    // creating a second one. Fields only upgrade (a later email-only
+    // registration never wipes an already-verified phone).
+    const dsId = await resolveDataSourceId(notion, dbId);
+    let existingId: string | null = null;
+    if (dsId) {
+      const existing = (await notion.dataSources.query({
+        data_source_id: dsId,
+        filter: {
+          and: [
+            { property: "Email", email: { equals: payload.email } },
+            { property: "Session", select: { equals: sessionKey } },
+          ],
+        },
+        page_size: 1,
+      })) as { results: Array<{ id: string }> };
+      existingId = existing.results[0]?.id ?? null;
+    }
+
+    if (existingId) {
+      await notion.pages.update({
+        page_id: existingId,
+        properties: {
+          Name: { title: [{ text: { content: payload.first_name } }] },
+          ...(payload.restaurant
+            ? { Restaurant: { rich_text: [{ text: { content: payload.restaurant } }] } }
+            : {}),
+          ...(payload.phone
+            ? {
+                Phone: { phone_number: payload.phone },
+                "SMS Consent": { checkbox: payload.sms_consent },
+                "Phone Verified": { checkbox: payload.phone_verified },
+              }
+            : {}),
+        },
+      });
+      return;
+    }
+
     await notion.pages.create({
       parent: { database_id: dbId },
       properties: {
@@ -65,7 +102,7 @@ async function writeNotionRow(payload: WebhookPayload) {
         "SMS Consent": { checkbox: payload.sms_consent },
         "Phone Verified": { checkbox: payload.phone_verified },
         Status: { select: { name: "Registered" } },
-        Session: { select: { name: SESSION_KEY } },
+        Session: { select: { name: sessionKey } },
         Source: { select: { name: "Site" } },
         "Registered At": { date: { start: new Date().toISOString() } },
       },

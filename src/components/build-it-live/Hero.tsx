@@ -4,8 +4,15 @@ import { RegisterForm } from "./RegisterForm";
 // Hero: session pitch on the left, the registration form in the hero itself
 // (spec: never below the fold, never a link out). Copy verbatim from the
 // final copy doc; serif accent on "missed call." per the design system.
+// eventLine + gcalUrl come from the live BIL Sessions row (ISR) with the
+// static webinars.ts values as fallback.
 
-export function Hero() {
+interface HeroProps {
+  eventLine?: string;
+  gcalUrl?: string;
+}
+
+export function Hero({ eventLine = HERO.eventLine, gcalUrl }: HeroProps) {
   return (
     <section
       id="register"
@@ -30,12 +37,12 @@ export function Hero() {
           </p>
 
           <p className="mt-6 inline-flex rounded-lg border border-sun-400/30 bg-sun-400/[0.08] px-4 py-2.5 font-mono text-[13px] tracking-[0.02em] text-sun-300">
-            {HERO.eventLine}
+            {eventLine}
           </p>
         </div>
 
         <div className="lg:pt-2">
-          <RegisterForm />
+          <RegisterForm gcalUrl={gcalUrl} />
         </div>
       </div>
     </section>

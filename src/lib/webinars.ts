@@ -30,6 +30,7 @@ export const NEXT_SESSION = {
   id: "2026-08-build-it-live",
   number: 1,
   title: "The $27,000 Missed Call",
+  topicBuild: "a missed-call text-back system",
   startIso: "2026-08-04T14:00:00-05:00",
   endIso: "2026-08-04T14:50:00-05:00",
   dateLong: "Tuesday, August 4",

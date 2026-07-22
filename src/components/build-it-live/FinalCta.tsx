@@ -16,7 +16,12 @@ function capture(section: string) {
   }
 }
 
-export function FinalCta() {
+interface FinalCtaProps {
+  /** e.g. "August 4" — from the live session row, falling back to the static copy. */
+  dateShort?: string;
+}
+
+export function FinalCta({ dateShort = "August 4" }: FinalCtaProps = {}) {
   return (
     <section className="border-t border-black/10 bg-sun-400 px-[clamp(16px,5vw,40px)] py-[clamp(64px,10vw,112px)]">
       <div className="mx-auto grid w-full max-w-[1120px] items-center gap-10 md:grid-cols-[1.3fr_1fr]">
@@ -25,7 +30,7 @@ export function FinalCta() {
             {FINAL_CTA.eyebrow}
           </p>
           <h2 className="mt-4 max-w-[18ch] font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.02em] text-ink-900 md:text-5xl">
-            {FINAL_CTA.h2}
+            One leak gets fixed on {dateShort}.
           </h2>
           <p className="mt-6 max-w-[52ch] font-sans text-lg leading-relaxed text-ink-900/80">
             {FINAL_CTA.body}

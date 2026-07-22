@@ -34,13 +34,18 @@ function capture(event: string, props?: Record<string, unknown>) {
   }
 }
 
+interface RegisterFormProps {
+  /** Google Calendar quick-add URL from the live session row; falls back to the static one. */
+  gcalUrl?: string;
+}
+
 const inputClass =
   "w-full rounded-lg border border-white/12 bg-white/[0.04] px-4 py-3 font-sans text-[15px] text-cream-50 placeholder:text-body-dim focus:border-teal-400 focus:outline-none";
 const labelClass =
   "mb-1.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-body";
 const errorClass = "mt-1.5 font-sans text-[13px] leading-snug text-[#e3654f]";
 
-export function RegisterForm() {
+export function RegisterForm({ gcalUrl = GCAL_URL }: RegisterFormProps = {}) {
   const [step, setStep] = useState<Step>("form");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -227,7 +232,7 @@ export function RegisterForm() {
               : FORM.doneEmailOnlyLine}
         </p>
         <a
-          href={GCAL_URL}
+          href={gcalUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => capture("cta_click", { section: "confirmation-gcal" })}
