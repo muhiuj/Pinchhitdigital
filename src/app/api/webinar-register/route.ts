@@ -73,6 +73,9 @@ async function writeNotionRow(payload: WebhookPayload) {
         page_id: existingId,
         properties: {
           Name: { title: [{ text: { content: payload.first_name } }] },
+          // Re-registering always puts the person back in the reminder
+          // audience, even if a prior row was marked No-show.
+          Status: { select: { name: "Registered" } },
           ...(payload.restaurant
             ? { Restaurant: { rich_text: [{ text: { content: payload.restaurant } }] } }
             : {}),
