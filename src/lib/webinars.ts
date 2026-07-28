@@ -25,15 +25,15 @@ export const SEO = {
 
 /* ------------------------------------------------------ NEXT SESSION */
 // startIso/endIso drive the Event JSON-LD and the Google Calendar link.
-// Aug 4 2026 is CDT (UTC-5): 2:00 PM Central = 19:00 UTC.
+// Aug 18 2026 is CDT (UTC-5): 2:00 PM Central = 19:00 UTC.
 export const NEXT_SESSION = {
   id: "2026-08-build-it-live",
   number: 1,
   title: "The $27,000 Missed Call",
   topicBuild: "a missed-call text-back system",
-  startIso: "2026-08-04T14:00:00-05:00",
-  endIso: "2026-08-04T14:50:00-05:00",
-  dateLong: "Tuesday, August 4",
+  startIso: "2026-08-18T14:00:00-05:00",
+  endIso: "2026-08-18T14:50:00-05:00",
+  dateLong: "Tuesday, August 18",
   timeLabel: "2:00 PM Central",
 } as const;
 
@@ -43,7 +43,7 @@ const GCAL_TEXT = encodeURIComponent(`Build It Live: ${NEXT_SESSION.title}`);
 const GCAL_DETAILS = encodeURIComponent(
   "Watch a missed-call text-back system get built from scratch in 30 minutes, in plain English. Your join link arrives by email before the session.\n\nhttps://www.pinchhitdigital.com/build-it-live",
 );
-export const GCAL_URL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${GCAL_TEXT}&dates=20260804T190000Z/20260804T195000Z&details=${GCAL_DETAILS}`;
+export const GCAL_URL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${GCAL_TEXT}&dates=20260818T190000Z/20260818T195000Z&details=${GCAL_DETAILS}`;
 
 /* ---------------------------------------------------------------- HERO */
 export const HERO = {
@@ -195,7 +195,7 @@ export const PAST_SESSIONS_SECTION = {
   intro:
     "Every session gets an edited replay, posted here. Free to watch, no signup, no gate.",
   emptyState:
-    "Session 001 is the first one. It streams live on August 4, and the edited replay lands here shortly after.",
+    "Session 001 is the first one. It streams live on August 18, and the edited replay lands here shortly after.",
 } as const;
 
 // Archive starts empty for Session #1. After each session: upload the edited
@@ -230,7 +230,7 @@ export const FAQ_ITEMS = [
 /* ---------------------------------------------------------- FINAL CTA */
 export const FINAL_CTA = {
   eyebrow: "Save your spot",
-  h2: "One leak gets fixed on August 4.",
+  h2: "One leak gets fixed on August 18.",
   body: "One revenue leak, one live fix, 50 minutes. This session it's the missed call. Next month it's another leak, and this same page registers you for that one too. Registration takes two fields and about fifteen seconds.",
   cta: "Save my spot, it's free",
   auditLead: "Rather have your own leaks found first?",

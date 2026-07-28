@@ -17,11 +17,11 @@ function capture(section: string) {
 }
 
 interface FinalCtaProps {
-  /** e.g. "August 4" — from the live session row, falling back to the static copy. */
+  /** e.g. "August 18" — from the live session row, falling back to the static copy. */
   dateShort?: string;
 }
 
-export function FinalCta({ dateShort = "August 4" }: FinalCtaProps = {}) {
+export function FinalCta({ dateShort = "August 18" }: FinalCtaProps = {}) {
   return (
     <section className="border-t border-black/10 bg-sun-400 px-[clamp(16px,5vw,40px)] py-[clamp(64px,10vw,112px)]">
       <div className="mx-auto grid w-full max-w-[1120px] items-center gap-10 md:grid-cols-[1.3fr_1fr]">

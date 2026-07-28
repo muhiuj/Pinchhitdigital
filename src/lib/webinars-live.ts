@@ -17,8 +17,8 @@ export interface LiveSession {
   topicBuild: string;
   startIso: string;
   endIso: string;
-  dateLong: string; // "Tuesday, August 4"
-  dateShort: string; // "August 4"
+  dateLong: string; // "Tuesday, August 18"
+  dateShort: string; // "August 18"
   timeLabel: string; // "2:00 PM Central"
   eventLine: string;
   gcalUrl: string;
