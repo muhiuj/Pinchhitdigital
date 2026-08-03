@@ -1,8 +1,8 @@
 "use client";
 
 import posthog from "posthog-js";
-import { HardHat, Scale, Utensils, type LucideIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Scale, Utensils } from "lucide-react";
+import { useEffect, useState, type ComponentType } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
   DEFAULT_INDUSTRY,
@@ -17,8 +17,36 @@ import {
 // selecting a card mirrors the choice back into the querystring so ads and
 // referrals can copy the URL.
 
-const ICONS: Record<IndustryKey, LucideIcon> = {
-  construction: HardHat,
+interface IconProps {
+  size?: number;
+  strokeWidth?: number;
+  className?: string;
+}
+
+// Untitled UI "building-03", lifted verbatim from Jeremy's approved Figma
+// prototype (the one icon that isn't lucide; it matches the lucide stroke
+// style at strokeWidth 1.75).
+function BuildingIcon({ size = 24, strokeWidth = 2, className }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M7.5 11H4.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C3 11.76 3 12.04 3 12.6V21M16.5 11h2.9c.56 0 .84 0 1.054.109a1 1 0 0 1 .437.437C21 11.76 21 12.04 21 12.6V21M16.5 21V6.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C14.98 3 14.42 3 13.3 3h-2.6c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C7.5 4.52 7.5 5.08 7.5 6.2V21M22 21H2M11 7h2M11 11h2M11 15h2" />
+    </svg>
+  );
+}
+
+const ICONS: Record<IndustryKey, ComponentType<IconProps>> = {
+  construction: BuildingIcon,
   professional: Scale,
   restaurants: Utensils,
 };
