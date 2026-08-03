@@ -307,6 +307,36 @@
 }
 
 /* ------------------------------------------------------------------ */
+/* Homepage hero (2026-08 broadened refresh): faint 72px grid on the amber
+   band, and the gentle float loop for the collage cards. The grid-hover
+   fill is driven imperatively by HeroGridHover (client component). */
+.phd-hero-grid {
+  background-image:
+    linear-gradient(rgba(17, 22, 28, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 22, 28, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@keyframes phd-float {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(8px);
+  }
+}
+
+.phd-float {
+  animation: phd-float var(--float-dur, 5.5s) ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phd-float {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Rainbow attention ring (Webinars nav link). Adapted from the Magic UI
    RainbowButton technique: a multi-color gradient slid across
    background-position. Rendered as a border-only ring via the mask

@@ -10,6 +10,7 @@ type LinkItem = { href: string; label: string };
 const siteLinks: LinkItem[] = [
   { href: "/catering-lead-recovery", label: "Catering" },
   { href: "/plans", label: "Plans" },
+  { href: "/audit", label: "Free Audit" },
   { href: "/#how-it-works", label: "Process" },
   { href: "/#what-we-build", label: "Services" },
   { href: "/#benefits", label: "Benefits" },
@@ -32,7 +33,7 @@ type ContactItem = {
 const contactItems: ContactItem[] = [
   { label: "Email Jeremy", href: "mailto:jeremy.muhiu@pinchhitdigital.com" },
   {
-    label: "Book a 30-minute call",
+    label: "Book a demo",
     href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
     external: true,
   },

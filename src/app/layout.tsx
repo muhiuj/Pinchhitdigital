@@ -47,10 +47,11 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // Meta title is locked per the homepage brief; do not reword.
-  title: "Restaurant Catering Websites | Pinch Hit Digital — Dallas–Fort Worth",
+  // Reworded 2026-08 with the ICP broadening (Jeremy approved the SEO
+  // reset): the title must promise what the new H1 promises.
+  title: "Lead Recovery Systems for DFW Small Businesses | Pinch Hit Digital",
   description:
-    "Pinch Hit Digital helps Dallas–Fort Worth restaurants recover missed catering leads and automate follow-up. Start with the free 30-minute Revenue Audit.",
+    "Pinch Hit Digital builds automated lead response systems for Dallas–Fort Worth construction trades, professional services, and restaurants. Every inquiry answered in under five minutes. Book a free demo.",
 };
 
 export default function RootLayout({

@@ -13,7 +13,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
-import { HeroSlider } from "@/components/HeroSlider";
+import { FAQ_ITEMS } from "@/lib/faq";
+import { HeroCollage } from "@/components/home/HeroCollage";
+import { HeroGridHover } from "@/components/home/HeroGridHover";
+import { IndustrySections } from "@/components/home/IndustrySections";
 import { Proof } from "@/components/Proof";
 import ScrollReveal from "@/components/ScrollReveal";
 import { PLANS } from "@/lib/plans";
@@ -23,6 +26,19 @@ import { PLANS } from "@/lib/plans";
 // split-signal risk).
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.pinchhitdigital.com/" },
+};
+
+// FAQPage rich-result eligibility requires the answers to exist in the served
+// HTML (they do now: the accordion keeps every answer in the DOM and hides the
+// collapsed ones). Schema is built from the same FAQ_ITEMS the accordion renders.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 // Price bands under the product cards read straight from src/lib/plans.ts so
@@ -126,83 +142,62 @@ const steps: Step[] = [
 export default function Home() {
   return (
     <>
-      <header className="relative overflow-hidden bg-sun-400 px-6 pt-20 md:px-8">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] animate-slide-in-right md:block"
-        >
-          {/* Decorative watermark, display:none on mobile — never preload it
-              (a preload here put 43KB in the mobile critical path). */}
-          <Image
-            src="/phd-logo.png"
-            alt=""
-            fill
-            sizes="60vw"
-            className="object-contain object-right opacity-[0.18]"
-          />
-        </div>
+      <header className="phd-hero-grid relative overflow-hidden bg-sun-400 px-6 pt-20 md:px-8">
+        <HeroGridHover />
+        <HeroCollage />
 
         <div className="relative mx-auto max-w-[1320px] pb-16">
-          <div className="relative z-10">
+          <div className="pointer-events-none relative z-10 mx-auto flex max-w-[820px] flex-col items-center pt-2 text-center lg:pt-10">
             <span className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 py-1.5 pl-2 pr-4 font-display text-[12px] font-semibold tracking-[0.04em] text-cream-50">
               <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full bg-teal-400 text-[11px] text-ink-900">
                 ✶
               </span>
-              Catering lead recovery · DFW restaurants
+              Lead recovery · Built in DFW
             </span>
 
-            <h1 className="mt-7 max-w-[15ch] text-balance font-display text-[46px] font-extrabold leading-[0.95] tracking-[-0.03em] text-ink-900 sm:text-6xl md:text-7xl lg:text-[104px]">
+            <h1 className="mt-7 text-balance font-display text-[46px] font-extrabold leading-[0.95] tracking-[-0.03em] text-ink-900 sm:text-6xl md:text-7xl lg:text-[96px]">
               Never lose another{" "}
               <span className="font-serif text-[0.92em] font-normal italic tracking-[-0.02em] text-teal-700">
-                catering lead
+                lead
               </span>
               .
             </h1>
-          </div>
 
-          <div className="relative z-10 mt-14 grid items-end gap-10 border-t border-ink-900/20 pt-7 md:grid-cols-[1fr_auto] md:gap-16">
-            <p className="max-w-[580px] text-[17px] leading-[1.5] text-ink-900/85 md:text-[19px]">
-              Pinch Hit Digital builds automated response systems for{" "}
-              <span className="font-display font-bold">
-                Dallas–Fort Worth restaurants
-              </span>
-              , so every catering lead gets a real answer in under five minutes.
-              Built and run by the person who answers when you call.
+            <p className="mt-7 max-w-[560px] text-[17px] leading-[1.5] text-ink-900/85 md:text-[19px]">
+              Automated response systems for small businesses across{" "}
+              <span className="font-display font-bold">Dallas–Fort Worth</span>,
+              so every inquiry gets a real answer in under five minutes. Built
+              and run by the person who answers when you call.
             </p>
-            <div className="flex flex-col items-start gap-3">
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
-                >
-                  Book a 30-minute call <span>→</span>
-                </a>
-                <a
-                  href="#what-we-build"
-                  className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
-                >
-                  See services
-                </a>
-              </div>
-              <p className="font-sans text-[14px] text-ink-900/70">
-                Not ready to book?{" "}
-                <Link
-                  href="/audit"
-                  className="font-semibold text-ink-900 underline decoration-ink-900/40 underline-offset-4 transition-colors hover:decoration-ink-900"
-                >
-                  Take the free 60-second Catering Revenue Audit first.
-                </Link>
-              </p>
+
+            <div className="pointer-events-auto mt-9 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
+              >
+                Book a demo <span>→</span>
+              </a>
+              <a
+                href="#industries"
+                className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
+              >
+                Find your business below
+              </a>
             </div>
+            <p className="pointer-events-auto mt-3 font-sans text-[14px] text-ink-900/70">
+              Not ready to book?{" "}
+              <Link
+                href="/audit"
+                className="font-semibold text-ink-900 underline decoration-ink-900/40 underline-offset-4 transition-colors hover:decoration-ink-900"
+              >
+                Take the free 60-second Catering Revenue Audit first.
+              </Link>
+            </p>
           </div>
 
-          <div className="relative z-10 mt-10">
-            <HeroSlider />
-          </div>
-
-          <div className="relative z-10 mt-7 flex flex-wrap gap-2">
+          <div className="pointer-events-none relative z-10 mt-14 flex flex-wrap justify-center gap-2">
             {dfwChips.map((city) => (
               <span
                 key={city}
@@ -220,55 +215,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="problem" className="bg-cream-50 px-6 py-16 md:px-8 lg:py-24">
-        <ScrollReveal className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-wider text-teal-400">
-              The Problem
-            </p>
-            <h2 className="mt-2 max-w-[14ch] font-display text-4xl font-extrabold leading-tight text-ink-900 md:text-5xl">
-              Great work doesn&rsquo;t pay for a slow follow-up.
-            </h2>
-            <p className="mt-6 max-w-[52ch] font-body text-[17px] leading-relaxed text-ink-700">
-              Most DFW independent businesses lose revenue before the week is
-              over, not because the work is bad, but because the inquiry sat
-              in an inbox for 48 hours. By then, the customer booked someone
-              else.
-            </p>
-            <hr className="my-8 border-t border-ink-900/20" />
-            <p className="max-w-[52ch] font-body text-[17px] leading-relaxed text-ink-700">
-              Pinch Hit Digital builds the systems that give you your time
-              back: automations that respond instantly, websites that reflect
-              what you actually offer, and workflows that run while you&rsquo;re
-              doing the work you&rsquo;re actually good at.
-            </p>
-          </div>
-
-          <div>
-            <div className="rounded-2xl bg-ink-900 p-8">
-              <p className="mb-2 font-mono text-xs uppercase tracking-wider text-ink-400">
-                What the research shows
-              </p>
-              <div className="font-display text-7xl font-extrabold leading-none text-sun-400">
-                43%
-              </div>
-              <p className="mt-2 font-body text-base text-ink-100/80">
-                of restaurant calls go unanswered during peak hours, per
-                independent studies{" "}
-                <span className="whitespace-nowrap">(Hostie AI, 2025)</span>.
-              </p>
-              <hr className="my-6 border-t border-ink-100/10" />
-              <div className="font-display text-7xl font-extrabold leading-none text-sun-400">
-                21&times;
-              </div>
-              <p className="mt-2 font-body text-base text-ink-100/80">
-                more likely to qualify: leads contacted within 5 minutes
-                versus leads that wait 30 (Lead Response Management study).
-              </p>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
+      <IndustrySections />
 
       <section id="how-it-works" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
         <ScrollReveal className="mx-auto max-w-[1320px]">
@@ -428,8 +375,8 @@ export default function Home() {
               href="/plans"
               className="font-semibold text-ink-900 underline decoration-ink-900/30 underline-offset-4 transition-colors hover:decoration-ink-900"
             >
-              We build them for professional services and local service
-              businesses across DFW as well.
+              We build them for construction trades, professional services,
+              and restaurants across DFW.
             </Link>
           </p>
         </ScrollReveal>
@@ -568,6 +515,10 @@ export default function Home() {
       </section>
 
       <FAQ />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       <section id="contact" className="bg-sun-400 px-6 pt-14 pb-12 md:px-8 lg:pt-20 lg:pb-16">
         <ScrollReveal className="mx-auto max-w-[1320px]">
@@ -599,7 +550,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-7 py-4 font-display text-sm font-bold text-white transition-colors hover:bg-ink-800"
               >
-                Book a 30-minute call →
+                Book a demo →
               </a>
               <p className="font-mono text-xs uppercase tracking-wider text-ink-900/40">
                 It&rsquo;s 100% free.

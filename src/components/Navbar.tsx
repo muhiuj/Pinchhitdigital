@@ -97,7 +97,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="group hidden items-center gap-2 rounded-full bg-ink-900 px-4 py-3 font-display text-[12px] font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900 lg:inline-flex"
           >
-            Book a 30-minute call
+            Book a demo
             <span className="transition-transform duration-200 group-hover:translate-x-0.5">
               →
             </span>
@@ -133,7 +133,7 @@ export function Navbar() {
               onClick={close}
               className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-4 font-display text-sm font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900"
             >
-              Book a 30-minute call
+              Book a demo
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">
                 →
               </span>
