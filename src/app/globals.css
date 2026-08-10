@@ -317,6 +317,14 @@
   background-size: 72px 72px;
 }
 
+/* Dark-band variant of the hero grid (build-it-live page). */
+.phd-hero-grid-dark {
+  background-image:
+    linear-gradient(rgba(251, 247, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 247, 240, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
 @keyframes phd-float {
   from {
     transform: translateY(-6px);

@@ -5,9 +5,9 @@ import { Agenda } from "@/components/build-it-live/Agenda";
 import { BilFaq } from "@/components/build-it-live/BilFaq";
 import { FinalCta } from "@/components/build-it-live/FinalCta";
 import { Hero } from "@/components/build-it-live/Hero";
-import { PastSessions } from "@/components/build-it-live/PastSessions";
+import { Recording } from "@/components/build-it-live/Recording";
 import { StickyCta } from "@/components/build-it-live/StickyCta";
-import { TheLeak } from "@/components/build-it-live/TheLeak";
+import { TheMath } from "@/components/build-it-live/TheMath";
 import { WhoItsFor } from "@/components/build-it-live/WhoItsFor";
 
 // /build-it-live — evergreen registration page for the free monthly live
@@ -29,11 +29,20 @@ export const metadata: Metadata = {
     description: SEO.description,
     url: SEO.canonical,
     type: "website",
+    images: [
+      {
+        url: "https://www.pinchhitdigital.com/build-it-live/event-card.jpg",
+        width: 1080,
+        height: 1080,
+        alt: "Build It Live: watch a $3,000 system get built, free.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SEO.title,
     description: SEO.description,
+    images: ["https://www.pinchhitdigital.com/build-it-live/event-card.jpg"],
   },
 };
 
@@ -95,10 +104,10 @@ export default async function BuildItLivePage() {
   return (
     <div className="bg-canvas">
       <Hero eventLine={live.eventLine} gcalUrl={live.gcalUrl} />
-      <TheLeak />
+      <TheMath />
       <Agenda />
       <WhoItsFor />
-      <PastSessions />
+      <Recording />
       <BilFaq />
       <FinalCta dateShort={live.dateShort} />
       <StickyCta />

@@ -1,22 +1,25 @@
 import { Eyebrow, Section } from "@/components/catering/primitives";
-import { LEAK } from "@/lib/webinars";
+import { MATH } from "@/lib/webinars";
 
-// 01 · The leak, in numbers. Three sourced stats, each linking its
-// third-party source. Copy verbatim from the final copy doc.
+// 01 · First, the math. Facts-first evaluation: two sourced stats and the
+// one-line arithmetic the session opens with. No projected-loss totals;
+// the visitor runs their own number and decides.
 
-export function TheLeak() {
+export function TheMath() {
   return (
-    <Section id="the-leak" tone="surface">
-      <Eyebrow n="01" label="The cost of a missed call" />
+    <Section id="the-math" tone="surface">
+      <Eyebrow n="01" label="Decide if it's worth your hour" />
       <h2 className="mt-5 font-display text-3xl font-extrabold tracking-[-0.02em] text-cream-50 md:text-4xl">
-        {LEAK.h2}
+        First, the math.{" "}
+        <span className="font-serif italic text-teal-400">Yours</span>, not
+        ours.
       </h2>
       <p className="mt-5 max-w-[62ch] font-sans text-base leading-relaxed text-body sm:text-lg">
-        {LEAK.lede}
+        {MATH.lede}
       </p>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-3">
-        {LEAK.stats.map((stat) => (
+      <div className="mt-10 grid gap-5 md:grid-cols-2">
+        {MATH.stats.map((stat) => (
           <div
             key={stat.value}
             className="flex flex-col rounded-2xl border border-white/[0.08] bg-card p-6"
@@ -40,7 +43,7 @@ export function TheLeak() {
       </div>
 
       <p className="mt-10 max-w-[68ch] font-sans text-base leading-relaxed text-body sm:text-lg">
-        {LEAK.closing}
+        {MATH.closing}
       </p>
     </Section>
   );

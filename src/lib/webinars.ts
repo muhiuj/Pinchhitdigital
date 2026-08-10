@@ -18,7 +18,7 @@ export const SEO = {
   title:
     "Build It Live | Free Monthly Automation Webinar for DFW Business Owners | Pinch Hit Digital",
   description:
-    "Watch one revenue leak get fixed live each month, free and online. Next session: a missed-call text-back system built from scratch in 30 minutes, in plain English. Register with a name and email.",
+    "Watch a $3,000 missed-call text-back system get built from scratch, free and live, in plain English. Follow along with your team and take the recipe home. Registrants get the full recording.",
   slug: "/build-it-live",
   canonical: "https://www.pinchhitdigital.com/build-it-live",
 } as const;
@@ -29,7 +29,7 @@ export const SEO = {
 export const NEXT_SESSION = {
   id: "2026-08-build-it-live",
   number: 1,
-  title: "The $27,000 Missed Call",
+  title: "The $3,000 Text-Back System",
   topicBuild: "a missed-call text-back system",
   startIso: "2026-08-18T14:00:00-05:00",
   endIso: "2026-08-18T14:50:00-05:00",
@@ -48,13 +48,15 @@ export const GCAL_URL = `https://calendar.google.com/calendar/render?action=TEMP
 /* ---------------------------------------------------------------- HERO */
 export const HERO = {
   eyebrow: "Build It Live · free monthly live build · online",
-  // H1 rendered in the component (serif accent on "missed call.").
+  // H1 rendered in the component (serif accent on "$3,000").
   subhead:
-    "Every month, one revenue leak gets fixed live on screen. This session: watch a missed-call text-back system get built from scratch in 30 minutes, in plain English. No slides. No pitch. You take the exact recipe home.",
+    "Agencies charge about $3,000 to build a missed-call text-back system: it answers every call your business misses, by text, in seconds. Watch one get built from scratch, live, in plain English. Follow along, test it from your own phone, and take the recipe home.",
+  priceNote:
+    "$3,000 is a typical agency price for a done-for-you build like this one.",
   eventLine: `${NEXT_SESSION.dateLong} · ${NEXT_SESSION.timeLabel} · 50 minutes · online & recorded`,
   cta: "Save my spot, it's free",
   ctaNote:
-    "Built for restaurant owner-operators. Can't make it live? Register anyway and the replay comes to you.",
+    "Built for owner-operated teams of fewer than 50 people. Can't make it live? Register anyway and the full recording comes to you.",
 } as const;
 
 /* ---------------------------------------------------------------- FORM */
@@ -64,7 +66,7 @@ export const FORM = {
   phoneLabel: "Mobile",
   // The payoff, never "(optional)": the phone field earns its keep.
   phonePayoff: "Get your join link by text 15 minutes before we start.",
-  restaurantLabel: "Restaurant or business name (optional)",
+  restaurantLabel: "Business or organization name (optional)",
   // Carrier-reviewable consent language (spec addendum, verbatim). The two
   // policy links render after this sentence in the component.
   consentText:
@@ -96,18 +98,18 @@ export const FORM = {
     "We couldn't send a verification text just now, so your reminders and join link will come by email instead.",
 } as const;
 
-/* -------------------------------------------------- 01 · THE LEAK */
-export interface LeakStat {
+/* -------------------------------------------------- 01 · THE MATH */
+export interface MathStat {
   value: string;
   label: string;
   sourceName: string;
   sourceUrl: string;
 }
 
-export const LEAK = {
-  eyebrow: "01 · The cost of a missed call",
-  h2: "The leak, in numbers",
-  lede: "Missed calls are not a discipline problem. They are what happens when the phone rings while your team is running a service. The math still lands on you.",
+export const MATH = {
+  eyebrow: "01 · Decide if it's worth your hour",
+  h2: "First, the math. Yours, not ours.",
+  lede: "A missed-call system only matters if your business misses calls that carry money. So the session starts there, with two facts and one line of arithmetic.",
   stats: [
     {
       value: "62%",
@@ -118,24 +120,15 @@ export const LEAK = {
         "https://411locals.us/small-business-owners-dont-answer-62-of-phone-calls/",
     },
     {
-      value: "$420",
+      value: "21×",
       label:
-        "average catering order in 2025. One missed catering call is a lunch rush.",
-      sourceName: "Source: ezCater",
-      sourceUrl:
-        "https://www.ezcater.com/company/press-release/new-ezcater-data-highlights-workplace-food-as-a-key-growth-driver-for-restaurants/",
+        "more likely to qualify: leads contacted within 5 minutes versus leads that wait 30",
+      sourceName: "Source: Lead Response Management study",
+      sourceUrl: "https://www.leadresponsemanagement.org/lrm_study",
     },
-    {
-      value: "~$27K",
-      label:
-        "estimated yearly revenue a single location loses to unanswered calls",
-      sourceName: "Source: HungerRush",
-      sourceUrl:
-        "https://www.hungerrush.com/restaurant-operations/heres-how-much-revenue-your-restaurant-loses-from-unanswered-phone-calls/",
-    },
-  ] as LeakStat[],
+  ] as MathStat[],
   closing:
-    "The fix is a system that texts every missed caller back in under a minute, automatically, so the conversation starts even when nobody could pick up. That system is what gets built at this session, start to finish, while you watch.",
+    "The arithmetic is one line: your average sale, times the calls you miss in a week. A plumbing company and an art studio get very different answers, and that is the point. If your number is small, you'll know this build is not for you, and the hour cost you nothing. If it isn't, you'll watch the fix get built in front of you.",
 } as const;
 
 /* -------------------------------------------------- 02 · THE AGENDA */
@@ -150,23 +143,27 @@ export const AGENDA = {
   items: [
     {
       time: "0:00",
-      text: "The math. What missed calls cost a restaurant like yours, derived on screen with the sources shown. Bring your own missed-call tally and we run your numbers, not the industry's.",
+      text: "The evaluation. Does this system make sense for your business? We run the math with your numbers, on screen, and you decide whether to build along or just watch.",
     },
     {
-      time: "0:05",
-      text: "The live build. A missed-call text-back system, built from a blank screen in about 30 minutes. Every step narrated in plain language. A call comes in, nobody answers, the caller gets a text in under a minute, and the lead is logged.",
+      time: "0:08",
+      text: "Tool sign-up. We create the two accounts the system runs on, together. A short sign-up guide arrives by email before the session so you can show up with them ready.",
     },
     {
-      time: "0:35",
-      text: "Your version. What the same system looks like at your restaurant, and what it takes to run it.",
+      time: "0:15",
+      text: "The live build. A missed-call text-back system, built from a blank screen, every step narrated in plain language.",
     },
     {
-      time: "0:40",
+      time: "0:38",
+      text: "The test. We call the number, let the call miss, and watch the text-back land in seconds.",
+    },
+    {
+      time: "0:42",
       text: "Q&A. Bring the awkward questions. They are the useful ones.",
     },
     {
       time: "0:48",
-      text: "One offer, stated once. A free 30-minute Revenue Audit for anyone who wants their own leaks found. That's the whole pitch, and it's the only one.",
+      text: "One offer, stated once. A free digital systems audit for anyone who wants help finding what to automate next. That's the whole pitch, and it's the only one.",
     },
   ] as AgendaItem[],
 } as const;
@@ -175,7 +172,7 @@ export const AGENDA = {
 export const WHO = {
   eyebrow: "03 · Who this is for",
   h2: "Built for owners, not developers.",
-  body: "Build It Live is for restaurant owner-operators first: the people running the room, the line, and the phone at the same time. No technical background is needed. Every step gets narrated in plain language, and when a technical term shows up, a plain-English explanation follows it in the same breath. The same systems work for any owner-operated business where calls and messages arrive faster than a small team can answer them, so owners from trades, retail, and clinics are just as welcome in the room.",
+  body: "Build It Live is for owner-operated organizations of fewer than 50 people: the shops, offices, and studios where whoever answers the phone is also doing the work. No technical background is needed. Every step gets narrated in plain language, and when a technical term shows up, a plain-English explanation follows in the same breath. If you can follow a recipe, you can follow the build.",
 } as const;
 
 /* -------------------------------------------------- 04 · PAST SESSIONS */
@@ -189,13 +186,10 @@ export interface WebinarSession {
   coverImage?: string; // /webinars/…jpg; falls back to the YouTube thumbnail
 }
 
-export const PAST_SESSIONS_SECTION = {
-  eyebrow: "04 · Past sessions",
-  h2: "Watch a past session",
-  intro:
-    "Every session gets an edited replay, posted here. Free to watch, no signup, no gate.",
-  emptyState:
-    "Session 001 is the first one. It streams live on August 18, and the edited replay lands here shortly after.",
+export const RECORDING = {
+  eyebrow: "04 · Can't make it live?",
+  h2: "Register anyway. The recording comes to you.",
+  body: "Every registrant gets the full recording after the session, whether or not they attend. That is deliberate: the build is meant to be paused, replayed, and copied at your own speed. The recording goes to registrants only and is not posted publicly, so save your spot even if the time doesn't work.",
 } as const;
 
 // Archive starts empty for Session #1. After each session: upload the edited
@@ -211,7 +205,7 @@ export const FAQ_SECTION = {
 export const FAQ_ITEMS = [
   {
     q: "Is it really free?",
-    a: "Yes. The session is free, the replay is free, and the recipe is free. The business behind it runs on the free 30-minute Revenue Audit, and that gets one mention at the end of the hour, stated as plainly as it is here.",
+    a: "Yes. The session is free, the recording is free for registrants, and the recipe is yours to keep. The business behind it runs on the free digital systems audit, and that gets one mention at the end of the hour, stated as plainly as it is here.",
   },
   {
     q: "Do I need to be technical?",
@@ -219,22 +213,26 @@ export const FAQ_ITEMS = [
   },
   {
     q: "What if I can't attend live?",
-    a: "Register anyway. The replay goes to every registrant, and the edited version gets posted on this page, free to watch, no signup. The live hour adds the Q&A, so come if you can.",
+    a: "Register anyway. The full recording goes to every registrant after the session. It is not posted publicly, so registering is the only way to get it.",
+  },
+  {
+    q: "What does the system cost to run?",
+    a: "The session is free, and so is the recipe. The system itself runs on two tools with small subscriptions: a few dollars a month for the phone number and texts, plus the automation tool's starter plan. We put the exact numbers on screen during the build so you can decide with real figures.",
   },
   {
     q: "What's the catch?",
-    a: "There isn't one hiding. At the end of each session I mention the free 30-minute Revenue Audit, once, for anyone who wants their own leaks found. That mention is the entire pitch. The session is meant to be useful whether or not you ever book anything.",
+    a: "There isn't one hiding. At the end I mention the free digital systems audit, once, for anyone who wants help finding what to automate next. That mention is the entire pitch. The session is meant to be useful whether or not you ever book anything.",
   },
 ] as const;
 
 /* ---------------------------------------------------------- FINAL CTA */
 export const FINAL_CTA = {
   eyebrow: "Save your spot",
-  h2: "One leak gets fixed on August 18.",
-  body: "One revenue leak, one live fix, 50 minutes. This session it's the missed call. Next month it's another leak, and this same page registers you for that one too. Registration takes two fields and about fifteen seconds.",
+  // h2 rendered in the component with the live date.
+  body: "Fifty minutes, one working system, and a single mention of the free digital systems audit at the end. Registration takes two fields and about fifteen seconds, and the full recording comes to you whether or not you make it live.",
   cta: "Save my spot, it's free",
-  auditLead: "Rather have your own leaks found first?",
-  auditLink: "Book a free 30-minute Revenue Audit.",
+  auditLead: "Rather talk through your systems first?",
+  auditLink: "Book a free 30-minute digital systems audit.",
 } as const;
 
 /* ---------------------------------------------------------- STICKY CTA */
