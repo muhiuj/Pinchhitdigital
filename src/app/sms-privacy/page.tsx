@@ -10,31 +10,43 @@ export const metadata: Metadata = {
 
 export default function SmsPrivacyPage() {
   return (
-    <PolicyLayout title="SMS Privacy Policy" effectiveDate="June 24, 2026">
+    <PolicyLayout title="SMS Privacy Policy" effectiveDate="August 15, 2026">
       <P>
-        Pinch Hit Digital {'("we," "us," or "our")'} operates a digital business
-        card and SMS (text message) program. This Privacy Policy explains what
-        information we collect when you contact us by text message, how we use
-        it, and how we protect it.
+        Pinch Hit Digital {'("we," "us," or "our")'} operates SMS (text message)
+        programs, including a digital business card program and a missed-call
+        text-back service. This Privacy Policy explains what information we
+        collect when you contact us by text message or by phone call, how we
+        use it, and how we protect it.
       </P>
 
       <H2>Information We Collect</H2>
       <P>
-        When you tap our NFC business card and send us a text message, we may
+        When you tap our NFC business card and send us a text message, or when
+        you call a phone line we operate and the call goes unanswered, we may
         collect:
       </P>
       <UL>
-        <li>Your mobile phone number</li>
+        <li>
+          Your mobile phone number (provided by you in a text message, or
+          captured from caller ID when you place a call to us)
+        </li>
         <li>
           Your name and the location or event where we met (if you include them
           in your message)
         </li>
+        <li>The date and time of your call, if you called us</li>
         <li>The content and timestamp of the messages you send to us</li>
         <li>
           Records of our communications and your status in our customer
           relationship management (CRM) system
         </li>
       </UL>
+      <P>
+        For the missed-call text-back service, your phone number is captured
+        only from the call you place to us. We do not obtain your number from
+        any other source, purchase contact lists, or send messages to anyone
+        who has not first contacted us.
+      </P>
 
       <H2>How We Use Your Information</H2>
       <P>We use the information you provide solely to:</P>

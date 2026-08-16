@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SmsTermsPage() {
   return (
-    <PolicyLayout title="SMS Terms & Conditions" effectiveDate="June 24, 2026">
+    <PolicyLayout title="SMS Terms & Conditions" effectiveDate="August 15, 2026">
       <H2>Program Name</H2>
       <P>Pinch Hit Digital SMS Program</P>
 
@@ -22,9 +22,26 @@ export default function SmsTermsPage() {
         response to your inquiry and as follow-up to our conversation. This is a
         conversational messaging program that is initiated by you.
       </P>
+      <P>
+        <Bold>Missed-call text-back.</Bold> Pinch Hit Digital also operates a
+        missed-call text-back service. If you place a voice call to a phone
+        line we operate and we are unable to answer, a recorded greeting
+        informs you that you will receive a text message, and we then send a
+        text to the number you called from so the conversation can continue by
+        text. If you do not reply, we may send up to two brief follow-up
+        messages about your inquiry before the conversation closes. Any reply
+        from you ends the automated sequence and a person takes over. This
+        service sends conversational, customer-care messages only. It never
+        sends marketing or promotional content, and your number is used only to
+        respond to the inquiry you initiated by calling.
+      </P>
 
       <H2>Message Frequency</H2>
-      <P>Message frequency varies based on your interaction with us.</P>
+      <P>
+        Message frequency varies based on your interaction with us. For the
+        missed-call text-back service, we send at most three automated messages
+        per inquiry, and no messages at all unless you called us first.
+      </P>
 
       <H2>{"Message & Data Rates"}</H2>
       <P>
