@@ -79,6 +79,14 @@ export default function SmsPrivacyPage() {
         data and consent will not be shared with any third parties.
       </P>
 
+      <H2>{"Message Frequency & Rates"}</H2>
+      <P>
+        Message frequency varies based on your interaction with us. For the
+        missed-call text-back service, we send at most three automated messages
+        per inquiry, and none unless you contacted us first. Message and data
+        rates may apply according to your mobile {"carrier's"} plan.
+      </P>
+
       <H2>Your Choices</H2>
       <P>
         You can opt out of receiving text messages from us at any time by
