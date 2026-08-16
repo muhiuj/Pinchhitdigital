@@ -83,8 +83,9 @@ export default function SmsPrivacyPage() {
       <P>
         Message frequency varies based on your interaction with us. For the
         missed-call text-back service, we send at most three automated messages
-        per inquiry, and none unless you contacted us first. Message and data
-        rates may apply according to your mobile {"carrier's"} plan.
+        per inquiry, and only if you request a text by pressing 1 during our
+        greeting. Message and data rates may apply according to your mobile{" "}
+        {"carrier's"} plan.
       </P>
 
       <H2>Your Choices</H2>
