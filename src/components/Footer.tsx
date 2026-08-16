@@ -40,6 +40,7 @@ const contactItems: ContactItem[] = [
   { label: "Newsletter", href: "/newsletter" },
   { label: "SMS Privacy", href: "/sms-privacy" },
   { label: "SMS Terms", href: "/sms-terms" },
+  { label: "Text-Back Opt-In", href: "/textback-consent" },
 ];
 
 const dfwLines = [
