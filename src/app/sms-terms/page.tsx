@@ -35,7 +35,16 @@ export default function SmsTermsPage() {
         Any reply from you ends the automated sequence and a person takes over.
         This service sends conversational, customer-care messages only. It
         never sends marketing or promotional content, and your number is used
-        only to respond to the inquiry you initiated by calling.
+        only to respond to the inquiry you initiated by calling. The complete
+        opt-in experience, including a recording of the greeting, is publicly
+        documented at{" "}
+        <Link
+          href="/textback-consent"
+          className="font-medium text-teal-700 underline underline-offset-2 hover:text-teal-600"
+        >
+          pinchhitdigital.com/textback-consent
+        </Link>
+        .
       </P>
 
       <H2>Message Frequency</H2>
