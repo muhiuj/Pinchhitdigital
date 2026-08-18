@@ -2,7 +2,7 @@
 
 import posthog from "posthog-js";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FORM, GCAL_URL, HERO } from "@/lib/webinars";
 
 // Hero registration form. Three outcomes, none of which lose a registrant:
@@ -57,9 +57,24 @@ export function RegisterForm({ gcalUrl = GCAL_URL }: RegisterFormProps = {}) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [doneVariant, setDoneVariant] = useState<DoneVariant>("email_only");
+  // Late-registration contingency: during the live window the confirmation
+  // card shows a direct join button (fetched, never in the page HTML).
+  const [join, setJoin] = useState<{ url: string; state: string } | null>(null);
   // The E.164 number an OTP was sent to (fixed at the moment of send).
   const verifyPhone = useRef<string>("");
   const lastResend = useRef(0);
+
+  useEffect(() => {
+    if (step !== "done") return;
+    fetch("/api/webinar-join")
+      .then((res) => res.json())
+      .then((data: { joinUrl: string | null; state: string }) => {
+        if (data.joinUrl) setJoin({ url: data.joinUrl, state: data.state });
+      })
+      .catch(() => {
+        /* no join window, or fetch failed: email path still covers them */
+      });
+  }, [step]);
 
   async function register(payload: {
     phone?: string;
@@ -231,6 +246,20 @@ export function RegisterForm({ gcalUrl = GCAL_URL }: RegisterFormProps = {}) {
               ? FORM.doneVerifyFallbackLine
               : FORM.doneEmailOnlyLine}
         </p>
+        {join && (
+          <a
+            href={join.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => capture("cta_click", { section: "confirmation-join-now" })}
+            className="mt-5 flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-teal-400 px-6 font-display text-base font-bold text-ink-900 transition-colors hover:bg-teal-300"
+          >
+            {join.state === "live"
+              ? "We're live. Join the session now"
+              : "We start soon. Join the session"}
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
         <a
           href={gcalUrl}
           target="_blank"

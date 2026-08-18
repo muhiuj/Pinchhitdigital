@@ -22,6 +22,10 @@ export interface LiveSession {
   timeLabel: string; // "2:00 PM Central"
   eventLine: string;
   gcalUrl: string;
+  /** Zoom join URL from the BIL Sessions row; empty until Jeremy fills it.
+      Never rendered into the page HTML — served only by /api/webinar-join
+      during the session window. */
+  zoomLink: string;
   isFallback: boolean;
 }
 
@@ -42,6 +46,7 @@ function buildSession(
   topicBuild: string,
   startIso: string,
   isFallback: boolean,
+  zoomLink = "",
 ): LiveSession {
   const start = new Date(startIso);
   const end = new Date(start.getTime() + SESSION_MINUTES * 60_000);
@@ -63,6 +68,7 @@ function buildSession(
     timeLabel,
     eventLine: `${dateLong} · ${timeLabel} · 50 minutes · online & recorded`,
     gcalUrl: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalText}&dates=${gcalStamp(start)}/${gcalStamp(end)}&details=${gcalDetails}`,
+    zoomLink,
     isFallback,
   };
 }
@@ -82,6 +88,7 @@ type NotionProp = {
   rich_text?: Array<{ plain_text?: string }>;
   date?: { start?: string | null } | null;
   select?: { name?: string } | null;
+  url?: string | null;
 };
 
 function plainText(prop: NotionProp | undefined): string {
@@ -136,7 +143,8 @@ export async function getLiveSession(): Promise<LiveSession> {
     const topicBuild = plainText(props.topic_build);
     if (!sessionKey || !startIso || !title || !topicBuild) return FALLBACK;
 
-    const live = buildSession(sessionKey, title, topicBuild, startIso, false);
+    const zoomLink = props.zoom_link?.url ?? "";
+    const live = buildSession(sessionKey, title, topicBuild, startIso, false, zoomLink);
     sessionCache = { at: Date.now(), value: live };
     return live;
   } catch (error) {
