@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
 import { FAQ_ITEMS } from "@/lib/faq";
+import { CtaLink } from "@/components/home/CtaLink";
 import { HeroCollage } from "@/components/home/HeroCollage";
 import { HeroGridHover } from "@/components/home/HeroGridHover";
 import { Industries } from "@/components/home/Industries";
@@ -165,14 +166,13 @@ export default function Home() {
             </p>
 
             <div className="pointer-events-auto mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a
+              <CtaLink
                 href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                section="home-hero"
                 className="inline-flex items-center gap-2.5 rounded-full bg-ink-900 px-6 py-4 font-display text-[13px] font-bold tracking-[0.04em] text-cream-50 transition-colors hover:bg-teal-700"
               >
                 Book a demo <span>→</span>
-              </a>
+              </CtaLink>
               <a
                 href="#industries"
                 className="inline-flex items-center gap-2 border-b border-ink-900 px-2 py-4 font-display text-[13px] font-semibold tracking-[0.02em] text-ink-900"
@@ -182,12 +182,13 @@ export default function Home() {
             </div>
             <p className="pointer-events-auto mt-3 font-sans text-[14px] text-ink-900/70">
               Not ready to book?{" "}
-              <Link
+              <CtaLink
                 href="/case-studies/dfw-insurance-response-study"
+                section="home-hero-research"
                 className="font-semibold text-ink-900 underline decoration-ink-900/40 underline-offset-4 transition-colors hover:decoration-ink-900"
               >
                 Start with the research: our DFW response-time field study.
-              </Link>
+              </CtaLink>
             </p>
           </div>
 
@@ -238,21 +239,20 @@ export default function Home() {
                   {step.body}
                 </p>
                 {step.cta ? (
-                  <a
+                  <CtaLink
                     href={step.cta.href}
-                    target={step.cta.href.startsWith("http") ? "_blank" : undefined}
-                    rel={step.cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    section="home-process"
                     className="mt-6 inline-block font-display text-sm font-semibold text-teal-400 hover:underline"
                   >
                     {step.cta.label}
-                  </a>
+                  </CtaLink>
                 ) : null}
               </div>
             ))}
           </div>
 
           <div className="mt-10 border-t border-white/10">
-            <p className="pt-6 text-center font-mono text-xs text-white/30">
+            <p className="pt-6 text-center font-mono text-xs text-white/60">
               Most clients are up and running within 2 weeks of their audit.
             </p>
           </div>
@@ -332,14 +332,13 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
+              <CtaLink
                 href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                section="home-services"
                 className="mt-8 inline-block rounded-lg border-2 border-ink-900 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-ink-900 hover:text-white"
               >
                 Book a demo →
-              </a>
+              </CtaLink>
             </div>
           </div>
 
@@ -402,7 +401,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 border-t border-white/10">
-            <p className="pt-6 text-center font-mono text-xs text-white/30">
+            <p className="pt-6 text-center font-mono text-xs text-white/60">
               What partnering with a small, focused team actually feels like.
             </p>
           </div>
@@ -500,7 +499,7 @@ export default function Home() {
       <section id="contact" className="bg-sun-400 px-6 pt-14 pb-12 md:px-8 lg:pt-20 lg:pb-16">
         <ScrollReveal className="mx-auto max-w-[1320px]">
           <div className="max-w-[900px]">
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-ink-900/50">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-ink-900/70">
               Ready to start?
             </p>
             <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tight text-ink-900 md:text-7xl">
@@ -521,15 +520,14 @@ export default function Home() {
               answer is no.
             </p>
             <div className="flex flex-col items-start gap-2 md:items-end">
-              <a
+              <CtaLink
                 href="https://cal.com/jeremy-muhiu-7gtclu/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                section="home-final"
                 className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-7 py-4 font-display text-sm font-bold text-white transition-colors hover:bg-ink-800"
               >
                 Book a demo →
-              </a>
-              <p className="font-mono text-xs uppercase tracking-wider text-ink-900/40">
+              </CtaLink>
+              <p className="font-mono text-xs uppercase tracking-wider text-ink-900/70">
                 It&rsquo;s 100% free.
               </p>
             </div>

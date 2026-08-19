@@ -73,7 +73,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/60">
               Site
             </p>
             <ul className="space-y-3">
@@ -91,7 +91,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/60">
               Get in touch
             </p>
             <ul className="space-y-3">
@@ -111,7 +111,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/30">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-white/60">
               DFW &amp; Nearby
             </p>
             <ul className="space-y-3">
