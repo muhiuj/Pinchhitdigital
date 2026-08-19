@@ -16,10 +16,9 @@ import { FAQ } from "@/components/FAQ";
 import { FAQ_ITEMS } from "@/lib/faq";
 import { HeroCollage } from "@/components/home/HeroCollage";
 import { HeroGridHover } from "@/components/home/HeroGridHover";
-import { IndustrySections } from "@/components/home/IndustrySections";
+import { Industries } from "@/components/home/Industries";
 import { Proof } from "@/components/Proof";
 import ScrollReveal from "@/components/ScrollReveal";
-import { PLANS } from "@/lib/plans";
 
 // Title/description inherit from layout.tsx; the canonical must be the www
 // origin (a non-www → www redirect exists, and the canonical prevents any
@@ -41,11 +40,6 @@ const faqSchema = {
   })),
 };
 
-// Price bands under the product cards read straight from src/lib/plans.ts so
-// the homepage can never drift from the numbers published on /plans.
-const cateringPlan = PLANS.find((p) => p.id === "catering");
-const websitePlan = PLANS.find((p) => p.id === "website");
-
 const dfwChips = [
   "Dallas",
   "Fort Worth",
@@ -65,10 +59,10 @@ type Step = {
 };
 
 const flagshipFeatures = [
-  "Responds to inquiries in under 5 minutes",
-  "Multi-step drip follow-up sequence",
-  "Booking calendar integration",
-  "Monthly revenue gap report",
+  "Missed calls texted back in seconds",
+  "Every inquiry answered in under 5 minutes",
+  "Multi-step follow-up until a human closes the loop",
+  "Monthly response-time report",
 ];
 
 type Benefit = {
@@ -106,7 +100,7 @@ const benefits: Benefit[] = [
   {
     icon: RefreshCw,
     title: "Runs while you work",
-    body: "The automations don't stop when you're slammed on a Saturday night. The system is always on, even when you can't be.",
+    body: "The automations don't stop when you're on a job site, in a client meeting, or off for the weekend. The system is always on, even when you can't be.",
   },
 ];
 
@@ -120,8 +114,8 @@ const websiteFeatures = [
 const steps: Step[] = [
   {
     n: "01",
-    title: "Free 30-Minute Revenue Audit",
-    body: "We look at your digital footprint, your booking flow, and how you handle inbound inquiries. No pitch, just a clear picture of what's costing you.",
+    title: "Free 30-Minute Digital Systems Audit",
+    body: "We look at your inquiry flow the way a real buyer experiences it: the form, the phone, the after-hours gap. No pitch, just a clear picture of what's costing you.",
     cta: {
       href: "https://cal.com/jeremy-muhiu-7gtclu/30min",
       label: "Book yours →",
@@ -189,10 +183,10 @@ export default function Home() {
             <p className="pointer-events-auto mt-3 font-sans text-[14px] text-ink-900/70">
               Not ready to book?{" "}
               <Link
-                href="/audit"
+                href="/case-studies/dfw-insurance-response-study"
                 className="font-semibold text-ink-900 underline decoration-ink-900/40 underline-offset-4 transition-colors hover:decoration-ink-900"
               >
-                Take the free 60-second Catering Revenue Audit first.
+                Start with the research: our DFW response-time field study.
               </Link>
             </p>
           </div>
@@ -215,7 +209,7 @@ export default function Home() {
         </div>
       </header>
 
-      <IndustrySections />
+      <Industries />
 
       <section id="how-it-works" className="bg-ink-900 px-6 py-16 md:px-8 lg:py-24">
         <ScrollReveal className="mx-auto max-w-[1320px]">
@@ -280,15 +274,16 @@ export default function Home() {
                 Flagship
               </span>
               <h3 className="mt-4 font-display text-2xl font-extrabold text-white">
-                Catering Lead Recovery System
+                Lead Response System
               </h3>
               <p className="mt-1 font-serif text-xl italic text-sun-400">
-                Turn missed inquiries into booked events.
+                The first useful human response usually wins.
               </p>
               <p className="mt-4 font-sans text-[15px] leading-relaxed text-white/70">
-                Automated inquiry response, multi-step follow-up sequences,
-                and monthly revenue reporting. Built for DFW operators with
-                private event space: restaurants, venues, and caterers.
+                Missed-call text-back, instant inquiry response, and
+                follow-up that keeps every quote request alive until a person
+                closes it. Built for the businesses we serve across DFW and
+                proven in our published field research.
               </p>
               <ul className="mt-6 flex flex-col gap-3">
                 {flagshipFeatures.map((feature) => (
@@ -303,22 +298,12 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="/catering-lead-recovery"
+              <Link
+                href="/case-studies/dfw-insurance-response-study"
                 className="mt-8 inline-block rounded-lg bg-sun-400 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-sun-300"
               >
-                See how the system works →
-              </a>
-              {cateringPlan && (
-                <p className="mt-4 font-sans text-[14px] text-white/70">
-                  <Link
-                    href="/plans"
-                    className="underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
-                  >
-                    {cateringPlan.priceLine}
-                  </Link>
-                </p>
-              )}
+                See it proven in the field study →
+              </Link>
             </div>
 
             <div className="rounded-2xl border border-ink-900/10 bg-white p-10">
@@ -348,35 +333,27 @@ export default function Home() {
                 ))}
               </ul>
               <a
-                href="/plans"
+                href="https://cal.com/jeremy-muhiu-7gtclu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-8 inline-block rounded-lg border-2 border-ink-900 px-6 py-3 font-display text-sm font-bold text-ink-900 transition-colors hover:bg-ink-900 hover:text-white"
               >
-                See plans &amp; pricing →
+                Book a demo →
               </a>
-              {websitePlan && (
-                <p className="mt-4 font-sans text-[14px] text-ink-700">
-                  <Link
-                    href="/plans"
-                    className="underline decoration-ink-900/30 underline-offset-4 transition-colors hover:decoration-ink-900"
-                  >
-                    {websitePlan.priceLine}
-                  </Link>
-                </p>
-              )}
             </div>
           </div>
 
-          {/* The generalist truth, once, as one calm sentence (flagship-first,
-              generalist-second). */}
+          {/* The scoping truth, once, as one calm sentence (no public price
+              list; scope is set on the free audit). */}
           <p className="mt-10 max-w-[72ch] font-sans text-[16px] leading-relaxed text-ink-700">
-            The same systems work for any owner-operated business where
-            inquiries arrive faster than a small team can answer them.{" "}
+            Every engagement is scoped to the business after a free 30-minute
+            audit, so you see the full cost before anything gets built.{" "}
             <Link
-              href="/plans"
+              href="/#industries"
               className="font-semibold text-ink-900 underline decoration-ink-900/30 underline-offset-4 transition-colors hover:decoration-ink-900"
             >
-              We build them for construction trades, professional services,
-              and restaurants across DFW.
+              We build for insurance agencies, trades, and construction across
+              DFW.
             </Link>
           </p>
         </ScrollReveal>

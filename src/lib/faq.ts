@@ -16,7 +16,7 @@ export const FAQ_ITEMS: HomeFaqItem[] = [
   },
   {
     q: "What kinds of businesses do you work with?",
-    a: "Owner-operated businesses where inquiries arrive faster than a small team can answer them. Right now that means construction and trades, professional services like insurance and law, and restaurants with catering programs, across DFW.",
+    a: "Owner-operated businesses where inquiries arrive faster than a small team can answer them. Right now that means independent insurance agencies, electrical, HVAC, and plumbing companies, and construction companies across DFW.",
   },
   {
     q: "How long does it take to get up and running?",
@@ -32,7 +32,6 @@ export const FAQ_ITEMS: HomeFaqItem[] = [
   },
   {
     q: "What does it cost?",
-    a: "Real starting prices are on the plans page: catering lead recovery, websites, and the bundle, with setup and monthly laid out. The audit is always free, and it sets your final scope.",
-    link: { href: "/plans", label: "See plans →" },
+    a: "Every engagement is scoped to the business, so there is no one-size price list. The free 30-minute audit comes first: it defines the scope, and you see the full cost before anything gets built.",
   },
 ];

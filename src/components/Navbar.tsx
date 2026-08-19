@@ -1,33 +1,45 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import posthog from "posthog-js";
+import { useEffect, useRef, useState } from "react";
+import { INDUSTRY_NAV } from "@/lib/industries";
 
-// Top-nav kept lean and product-forward: the real destination pages plus one
-// About anchor. The homepage-section anchors (Process, Services, Benefits, FAQ)
-// live in the footer and on the homepage, so the bar doesn't get crowded.
-// `highlight` draws the one-shot rainbow attention ring (see globals.css:
-// .phd-rainbow-ring) around a link on mount — currently the Webinars link,
-// to pull eyes to the new Build It Live page.
+// Top nav, 2026-08 pivot: Industries dropdown (one entry per vertical, data
+// from src/lib/industries.ts) plus the destination pages. `highlight` draws
+// the one-shot rainbow attention ring (globals.css: .phd-rainbow-ring) —
+// currently Case Studies, the launch asset. The booking CTA now captures
+// cta_click {section: "nav"} (it was untracked before the pivot).
 const navLinks = [
-  { href: "/catering-lead-recovery", label: "Catering" },
-  { href: "/plans", label: "Plans" },
-  { href: "/guides", label: "Guides" },
+  { href: "/case-studies", label: "Case Studies", highlight: true },
   { href: "/blog", label: "Blog" },
   { href: "/#about", label: "About" },
-  { href: "/build-it-live", label: "Webinars", highlight: true },
+  { href: "/build-it-live", label: "Webinars" },
 ];
 
 const CAL_URL = "https://cal.com/jeremy-muhiu-7gtclu/30min";
 
+function captureNavCta() {
+  try {
+    posthog.capture("cta_click", { section: "nav" });
+  } catch {
+    /* no-op */
+  }
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const close = () => {
+    setOpen(false);
+    setIndustriesOpen(false);
+  };
 
-  // Lock body scroll + close on Esc while the menu is open. Effect re-runs
-  // whenever `open` changes; cleanup restores the original overflow value.
+  // Lock body scroll + close on Esc while the mobile menu is open. Effect
+  // re-runs whenever `open` changes; cleanup restores the original overflow.
   useEffect(() => {
     if (!open) return;
 
@@ -44,6 +56,25 @@ export function Navbar() {
       document.body.style.overflow = prevOverflow;
     };
   }, [open]);
+
+  // Close the desktop dropdown on outside click or Esc.
+  useEffect(() => {
+    if (!industriesOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) {
+        setIndustriesOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIndustriesOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [industriesOpen]);
 
   const desktopLinkClass =
     "font-display text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-700 transition-colors hover:text-ink-900";
@@ -69,18 +100,48 @@ export function Navbar() {
 
         {/* Desktop nav links — hidden below lg */}
         <div className="ml-6 hidden items-center gap-7 lg:flex">
+          {/* Industries dropdown */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setIndustriesOpen((o) => !o)}
+              aria-expanded={industriesOpen}
+              aria-haspopup="true"
+              className={`${desktopLinkClass} inline-flex items-center gap-1.5`}
+            >
+              Industries
+              <ChevronDown
+                size={14}
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${
+                  industriesOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {industriesOpen ? (
+              <div className="absolute left-0 top-full mt-3 min-w-[240px] rounded-xl border border-ink-200 bg-cream-50 p-2 shadow-lg">
+                {INDUSTRY_NAV.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={close}
+                    className="block rounded-lg px-3.5 py-2.5 font-display text-[13px] font-semibold text-ink-900 transition-colors hover:bg-ink-100"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
           {navLinks.map((link) => {
             const cls = link.highlight
               ? `${desktopLinkClass} phd-rainbow-ring -mx-1 px-3 py-1.5`
               : desktopLinkClass;
-            return link.href.startsWith("/") ? (
+            return (
               <Link key={link.href} href={link.href} className={cls}>
                 {link.label}
               </Link>
-            ) : (
-              <a key={link.href} href={link.href} className={cls}>
-                {link.label}
-              </a>
             );
           })}
         </div>
@@ -95,6 +156,7 @@ export function Navbar() {
             href={CAL_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={captureNavCta}
             className="group hidden items-center gap-2 rounded-full bg-ink-900 px-4 py-3 font-display text-[12px] font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900 lg:inline-flex"
           >
             Book a demo
@@ -130,7 +192,10 @@ export function Navbar() {
               href={CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={close}
+              onClick={() => {
+                captureNavCta();
+                close();
+              }}
               className="group flex w-full items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-4 font-display text-sm font-bold uppercase tracking-[0.08em] text-cream-50 transition-colors hover:bg-sun-400 hover:text-ink-900"
             >
               Book a demo
@@ -139,14 +204,30 @@ export function Navbar() {
               </span>
             </a>
 
-            {/* Nav links — stacked, big tap targets. The menu mounts on
+            {/* Industries group, then the flat links. The menu mounts on
                 open, so a highlighted link replays its ring each open. */}
-            <div className="mt-6 space-y-1 border-t border-ink-200 pt-4">
+            <div className="mt-6 border-t border-ink-200 pt-4">
+              <p className="px-2 pb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500">
+                Industries
+              </p>
+              {INDUSTRY_NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  className={`${mobileLinkClass} pl-4`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-4 space-y-1 border-t border-ink-200 pt-4">
               {navLinks.map((link) => {
                 const cls = link.highlight
                   ? `${mobileLinkClass} phd-rainbow-ring px-4`
                   : mobileLinkClass;
-                return link.href.startsWith("/") ? (
+                return (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -155,15 +236,6 @@ export function Navbar() {
                   >
                     {link.label}
                   </Link>
-                ) : (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={close}
-                    className={cls}
-                  >
-                    {link.label}
-                  </a>
                 );
               })}
             </div>

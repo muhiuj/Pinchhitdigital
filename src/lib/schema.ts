@@ -1,14 +1,12 @@
 // Structured data emitted as JSON-LD for search engines.
-// professionalServiceSchema describes the business; cateringServiceSchema
+// professionalServiceSchema describes the business; leadResponseServiceSchema
 // describes the flagship offering. Both render globally from layout.tsx so
 // every page reinforces NAP + service consistency for local SEO. Additional
 // page-specific schemas (Article, FAQPage, BreadcrumbList) can be rendered
 // per-route alongside these two.
 //
-// plansSchema (below) is page-specific — it carries Offer pricing and only
-// belongs on /plans, so it is rendered from that page, NOT from layout.tsx.
-
-import { PLANS } from "@/lib/plans";
+// 2026-08 pivot: positioning is insurance agencies, trades, and construction.
+// Catering entities and the /plans Offer schema were retired with their pages.
 
 // Common city-level service area used by both entities so the values stay
 // in sync if we add or drop a city.
@@ -37,7 +35,7 @@ export const professionalServiceSchema = {
   email: "jeremy.muhiu@pinchhitdigital.com",
   sameAs: ["https://cal.com/jeremy-muhiu-7gtclu/30min"],
   description:
-    "Catering lead recovery and digital systems for DFW restaurants and small businesses. Websites, automation, and inquiry workflows built for owner-operators across Dallas–Fort Worth.",
+    "Lead response systems and digital consulting for independent insurance agencies, trades contractors, and construction companies across Dallas–Fort Worth. Every inquiry answered in minutes.",
   founder: {
     "@type": "Person",
     name: "Jeremy Muhiu",
@@ -52,22 +50,22 @@ export const professionalServiceSchema = {
   },
   areaServed: DFW_AREA_SERVED,
   knowsAbout: [
-    "Restaurant catering systems",
-    "Catering lead recovery",
+    "Insurance agency lead follow-up",
+    "Missed-call text-back systems",
+    "Lead response automation",
     "Digital consulting",
     "Website design",
-    "Marketing automation",
   ],
 } as const;
 
-export const cateringServiceSchema = {
+export const leadResponseServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Catering Lead Recovery System",
-  serviceType: "Restaurant catering lead recovery",
+  name: "Lead Response System",
+  serviceType: "Lead response and follow-up automation",
   description:
-    "Automated inquiry response, multi-step follow-up sequences, and monthly revenue reporting that turn missed catering inquiries into booked events for DFW restaurants.",
-  url: "https://www.pinchhitdigital.com/catering-lead-recovery",
+    "Missed-call text-back, instant inquiry response, and follow-up workflows that keep every quote request alive until a human closes it. Built for independent insurance agencies, trades contractors, and construction companies in DFW.",
+  url: "https://www.pinchhitdigital.com",
   provider: {
     "@type": "ProfessionalService",
     name: "Pinch Hit Digital",
@@ -76,36 +74,7 @@ export const cateringServiceSchema = {
   areaServed: DFW_AREA_SERVED,
   audience: {
     "@type": "BusinessAudience",
-    audienceType: "Independent restaurant operators",
+    audienceType:
+      "Independent insurance agencies, trades contractors, and construction companies",
   },
 } as const;
-
-// Page-specific schema for /plans. One Service entity per product, each with
-// an Offer carrying the "starting at" setup price in USD so Google can surface
-// pricing in local results. Prices are read from src/lib/plans.ts — bump them
-// there and this updates in lockstep. The setup fee is used as the Offer
-// anchor price; the recurring monthly is described in the Offer description
-// since a single Offer.price can only hold one figure.
-export const plansSchema = PLANS.map((plan) => ({
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: plan.name,
-  description: plan.tagline,
-  url: "https://www.pinchhitdigital.com/plans",
-  provider: {
-    "@type": "ProfessionalService",
-    name: "Pinch Hit Digital",
-    url: "https://www.pinchhitdigital.com",
-  },
-  areaServed: DFW_AREA_SERVED,
-  offers: {
-    "@type": "Offer",
-    priceCurrency: "USD",
-    price: plan.setup,
-    description: `Starting at $${plan.setup.toLocaleString(
-      "en-US",
-    )} setup plus $${plan.monthly}/mo. Final scope set on a free audit.`,
-    url: "https://www.pinchhitdigital.com/plans",
-    availability: "https://schema.org/InStock",
-  },
-}));

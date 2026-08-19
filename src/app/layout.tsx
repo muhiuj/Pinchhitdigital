@@ -10,7 +10,7 @@ import { Navbar } from "@/components/Navbar";
 import { PostHogPageView } from "@/components/PostHogPageView";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import {
-  cateringServiceSchema,
+  leadResponseServiceSchema,
   professionalServiceSchema,
 } from "@/lib/schema";
 import "./globals.css";
@@ -80,7 +80,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(cateringServiceSchema),
+            __html: JSON.stringify(leadResponseServiceSchema),
           }}
         />
       </body>

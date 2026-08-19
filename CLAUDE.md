@@ -2,11 +2,13 @@
 
 # Pinch Hit Digital — Website
 
-## Positioning (next 90 days)
-- **Primary**: food & beverage operators in DFW (restaurants, cafés, caterers, bakeries, bars/taprooms, food trucks).
-- **Welcome but secondary**: any small-business operator (trades, retail, clinics, services). We build automation for any kind of business — never write copy that locks out non-F&B operators.
-- Founder distributes physical cards with QR → quiz → guide → catering page funnel.
-- Catering Lead Recovery System is the flagship Sprint-2 product.
+## Positioning (2026-08 pivot — supersedes everything older)
+- **Three ICPs, in order**: independent insurance agencies (current campaign focus), trades (electrical/HVAC/plumbing), construction. All DFW.
+- Food & beverage is retired: catering/plans/audit/guides pages were removed with 301s. F&B blog posts stay live but unfeatured. Never reintroduce catering copy.
+- Proof engine: published field research at /case-studies (Field Report No. 1: DFW insurance response study; No. 2 trades, pending). Site copy cites it instead of hype.
+- No public pricing anywhere: engagements are scoped after the free 30-minute digital systems audit.
+- IA: homepage → Industries nav dropdown → /industries/{insurance-agencies,trades,construction} landing pages (copy in src/lib/industries.ts).
+- Active campaign: reply emails to the studied agencies link the case study (+ `?src=audit-reply` UTM); the site's job is converting that warm cohort to a booked walkthrough.
 
 ## Design system (canonical, via Claude Design)
 
@@ -40,19 +42,17 @@ Full scales available: `teal-{50…950}`, `ink-{0…950}`, `sun-{300,400,500}`, 
 `lucide-react`. Common picks from the canonical design: map-pin, search-check, globe, route, bot, workflow, messages-square, mail, sparkles, utensils, cake, truck, wine, wrench, frame, stethoscope, store, zap, piggy-bank, user-round, trending-up, line-chart, refresh-ccw, plus.
 
 ## Pages
-- `/` Home — F&B-forward, small-business-broad. Hero → kitchen feature → industries marquee → process → services → industries split → benefits → stats → featured client → about → FAQ → CTA → footer.
-- `/audit` Free 30-min consultation booking page.
-- `/catering` (Sprint 2) Catering Lead Recovery System product page. Currently houses the navy "Stop Losing Catering Revenue" hero we built earlier.
-- `/guides` (Sprint 2) Guide downloads — Catering Recovery Audit + others.
+- `/` Home — hero → industries cards → process → services → benefits → about → FAQ → CTA.
+- `/industries/insurance-agencies`, `/industries/trades`, `/industries/construction` — per-vertical landing pages (shared template, copy in src/lib/industries.ts).
+- `/case-studies` + `/case-studies/dfw-insurance-response-study` — published field research (copy in src/lib/case-studies.ts, verbatim rules inside).
+- `/build-it-live` — live-build session page with working registration/SMS automation. Do not touch its files or API routes.
+- Removed with 301s (2026-08): /plans, /catering, /catering-lead-recovery, /audit, /guides.
 
 ## Key URLs
-- pinchhitdigital.com/audit → consultation booking
-- pinchhitdigital.com/catering → product page
-- pinchhitdigital.com/guides → guide downloads
-- Direct fallback: https://cal.com/jeremy-muhiu-7gtclu/30min
+- Booking (all CTAs): https://cal.com/jeremy-muhiu-7gtclu/30min ("Book a demo" sitewide; "Book a free walkthrough" on insurance surfaces)
 
 ## Do not
-- Write copy that locks out non-F&B small businesses (trades, retail, clinics).
+- Reintroduce F&B/catering copy, public pricing, or the retired ?for= industry picker.
 - Use generic small-business filler ("solutions", "leverage", "synergy").
 - Use stale color values (`#2A9D8F`, `#0D1B2A`, `#FAF7F0`) — those predate the Claude Design system. Real values are above.
 - Use Inter / Montserrat / Cormorant Garamond — the canonical fonts are Bricolage / Manrope / Instrument Serif / JetBrains Mono.

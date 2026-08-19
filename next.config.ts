@@ -23,6 +23,26 @@ const nextConfig: NextConfig = {
     // target.
     deviceSizes: [384, 640, 750, 828, 1080, 1200, 1920],
   },
+  // Old blog slug that Search Console still remembers (the post was never
+  // published under this URL). Point it at the closest live post so any
+  // residual link equity lands somewhere real.
+  async redirects() {
+    return [
+      {
+        source: "/blog/why-you-cant-automate-a-broken-process",
+        destination: "/blog/restaurant-ai-adoption-wrong-job-2026",
+        permanent: true,
+      },
+      // 2026-08 pivot: F&B pages and public pricing retired. Catering and
+      // audit-quiz URLs land on the homepage; guides' closest equivalent is
+      // the research index.
+      { source: "/plans", destination: "/", permanent: true },
+      { source: "/catering", destination: "/", permanent: true },
+      { source: "/catering-lead-recovery", destination: "/", permanent: true },
+      { source: "/audit", destination: "/", permanent: true },
+      { source: "/guides", destination: "/case-studies", permanent: true },
+    ];
+  },
   // PostHog reverse proxy. Routes analytics traffic through our own domain so
   // ad-blockers (which target *.i.posthog.com explicitly) can't drop events.
   // See https://posthog.com/docs/advanced/proxy/nextjs

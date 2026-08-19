@@ -8,16 +8,15 @@ import Image from "next/image";
 type LinkItem = { href: string; label: string };
 
 const siteLinks: LinkItem[] = [
-  { href: "/catering-lead-recovery", label: "Catering" },
-  { href: "/plans", label: "Plans" },
-  { href: "/audit", label: "Free Audit" },
+  { href: "/industries/insurance-agencies", label: "Insurance Agencies" },
+  { href: "/industries/trades", label: "Trades" },
+  { href: "/industries/construction", label: "Construction" },
   { href: "/#how-it-works", label: "Process" },
   { href: "/#what-we-build", label: "Services" },
-  { href: "/#benefits", label: "Benefits" },
   { href: "/#about", label: "About" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
-  { href: "/guides", label: "Free Guides" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/build-it-live", label: "Webinars" },
 ];
 

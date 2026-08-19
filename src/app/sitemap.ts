@@ -14,22 +14,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/catering-lead-recovery`,
+      url: `${baseUrl}/industries/insurance-agencies`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/audit`,
+      url: `${baseUrl}/industries/trades`,
       lastModified,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/guides`,
+      url: `${baseUrl}/industries/construction`,
       lastModified,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/build-it-live`,
@@ -44,11 +44,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      // Pricing changes more often than "yearly" signals to Googlebot.
-      url: `${baseUrl}/plans`,
+      url: `${baseUrl}/case-studies`,
       lastModified,
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/case-studies/dfw-insurance-response-study`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/newsletter`,

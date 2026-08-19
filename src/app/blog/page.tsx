@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/queries";
 export const metadata: Metadata = {
   title: "Blog | Pinch Hit Digital — DFW Restaurant Operators",
   description:
-    "Practical reads for DFW businesses — no fluff. Catering revenue, automation, and operations insights from Pinch Hit Digital.",
+    "Practical reads for DFW businesses. Lead response, automation, and operations insights from Pinch Hit Digital.",
 };
 
 // Revalidate the index every 60s so newly-published posts appear without a
