@@ -58,10 +58,12 @@ export const ENTRIES: CaseStudyEntry[] = [
   {
     type: "Research",
     label: "Field Report No. 2",
-    title: "The same study, run on DFW electrical, HVAC, and plumbing contractors.",
-    dek: "Where the story runs almost exactly backwards. Publishing soon.",
-    date: "Coming soon",
-    comingSoon: true,
+    title:
+      "I Sent Real Jobs to 49 Dallas Contractors on a Sunday. 31 Never Responded.",
+    dek: "How DFW electrical, HVAC, and plumbing contractors handle a live homeowner inquiry. Part two of a two-industry study.",
+    date: "August 23, 2026",
+    href: "/case-studies/dfw-contractor-response-study",
+    stat: { value: "31 of 49", caption: "Never responded" },
   },
 ];
 
@@ -278,7 +280,11 @@ export const REPORT_CLOSING: ReportSection[] = [
     heading: "What comes next",
     paras: [
       {
-        text: "Part two publishes next: the same audit, run on DFW's electrical, HVAC, and plumbing contractors, where the story runs almost exactly backwards. If you run an independent agency and want the full breakdown when the study concludes, it will live here.",
+        text: "Part two is published: the same audit, run on 49 of DFW's electrical, HVAC, and plumbing contractors, where the story runs almost exactly backwards. Read the contractor study.",
+        link: {
+          text: "Read the contractor study.",
+          href: "/case-studies/dfw-contractor-response-study",
+        },
       },
     ],
   },
@@ -402,8 +408,248 @@ export const TWO_DOORS = {
 } as const;
 
 /* --------------------------------------------------------------- final CTA */
+// The booking link is a 30-minute intro meeting; every CTA says 30 minutes.
 export const CTA = {
   heading: "Want to know what a commercial buyer would experience with your firm?",
-  button: "Book a free 15-minute walkthrough",
+  button: "Book a free 30-minute call",
+  buildItLiveLink: "I also build these systems live, in plain English.",
+} as const;
+
+/* ================================================================== */
+/* Field Report No. 2 — DFW contractor response study (2026-08-23).    */
+/* Report copy is VERBATIM from Jeremy's canonical copy doc: do not    */
+/* rewrite, tighten, or "improve" it. Same brand rules as part one.    */
+/* ================================================================== */
+
+export const STUDY2_SEO = {
+  title:
+    "I Sent Real Jobs to 49 Dallas Contractors. 31 Never Responded. | Pinch Hit Digital",
+  description:
+    "A field study of contractor lead response in DFW. 49 real job requests sent on a Sunday, timed to the minute. The fastest reply took 3 minutes. 31 never came.",
+  canonical:
+    "https://www.pinchhitdigital.com/case-studies/dfw-contractor-response-study",
+  datePublished: "2026-08-23",
+} as const;
+
+export const STUDY2_HERO = {
+  eyebrow: "Field Report No. 2 · DFW Trades",
+  title:
+    "I Sent Real Jobs to 49 Dallas Contractors on a Sunday. 31 Never Responded.",
+  dek: "Field Report No. 2: how DFW electrical, HVAC, and plumbing contractors handle a live homeowner inquiry. Part two of a two-industry study.",
+  crossLink: {
+    label: "Read part one here",
+    href: "/case-studies/dfw-insurance-response-study",
+  },
+  stats: [
+    { value: "49", caption: "Contractors, one Sunday" },
+    { value: "3", caption: "Minutes to the fastest human reply" },
+    { value: "31", caption: "Never responded" },
+  ],
+} as const;
+
+// Part one's hero gains the mirror link once part two is live.
+export const STUDY1_CROSSLINK = {
+  label: "Read part two",
+  href: "/case-studies/dfw-contractor-response-study",
+} as const;
+
+/* --------------------------------------------- part two report (VERBATIM) */
+export const REPORT2_INTRO: ReportSection[] = [
+  {
+    paras: [
+      {
+        text: "Two Sundays ago, mid-morning, I sent real work to 49 independent contractors across Dallas and Fort Worth. Electricians got a request for a full electrical inspection on a house headed to market. Plumbers got a cast iron pipe replacement. HVAC shops got a system that needed attention before listing. Real house, real projects, sent through the front door each company built for it: their own website form, or the email address they publish.",
+      },
+      {
+        text: "Then I started a clock on every one of them and measured the same single thing as part one: how long until a human being responded.",
+      },
+      {
+        text: "If you read the insurance study, you know what a weekend does to a quote request in that industry. Two humans out of 34, across two full days. I expected some version of the same story here.",
+        link: {
+          text: "the insurance study",
+          href: "/case-studies/dfw-insurance-response-study",
+        },
+      },
+      {
+        text: "The trades told a different one. The story runs backwards.",
+      },
+    ],
+  },
+  {
+    eyebrow: "01 · What came back",
+    heading: "The first 75 minutes",
+    paras: [
+      {
+        text: "A plumber's office replied to my cast iron inquiry three minutes after I hit submit. Not a robot. A person, with a plan to get someone out that week.",
+      },
+      {
+        text: "Two minutes behind them, a plumbing and air company's coordinator texted me about the pipe, riding right behind her own company's automated acknowledgment. Fourteen minutes after another form went in, my phone rang: an HVAC company calling me back. On a Sunday. Within the first 75 minutes, six companies had a human in contact with me. On the insurance side, that number after an entire weekend was two.",
+      },
+      {
+        text: "Monday morning brought the same flush I saw in insurance: eight more companies surfaced between 8:04 and 9:31am as the weekend's inboxes got opened. By the 26-hour mark, 15 of 49 had responded. The count now stands at 18 of 49, with a few late arrivals in between.",
+      },
+      {
+        text: "Which leaves the other number. Thirty-one of 49, nearly two thirds, have never had a human make contact. Not slowly. Not ever.",
+      },
+      {
+        text: "That is the shape of this industry's funnel, and it is not a bell curve. It is a barbell. The companies that respond are stunningly fast, minutes not days. The rest are perfectly silent. There is almost nobody in between.",
+      },
+    ],
+  },
+];
+
+export const REPORT2_EVENING: ReportSection[] = [
+  {
+    eyebrow: "02 · After hours",
+    heading: "Then the sun went down, and the phones kept answering",
+    paras: [
+      {
+        text: "In part one I called two dozen insurance agencies and learned that reaching a licensed human was a coin flip, and that evenings were a dead zone. One live answer out of six after-hours calls.",
+      },
+      {
+        text: "I ran the same experiment on the trades on a Tuesday evening, calling eight shops between roughly 5:45 and 6:30pm. Six answered live. A person, picking up the phone, at dinner time.",
+      },
+      {
+        text: "The difference is not virtue. It is economics. An insurance office at 6pm is a dark room. A plumber at 6pm knows that a ringing phone might be a burst pipe, and a burst pipe is revenue. This industry has wired urgency into its phone habits because emergencies taught it to.",
+      },
+      {
+        text: "The voicemail data agrees. I left three voicemails at trades shops across the study. All three came back. One the next morning, apologizing for missing a call from the night before. One sixteen hours later with the same apology. And one four days later, from a man just back from vacation, who returned a stranger's voicemail as nearly the first thing he did at his desk. Three for three. Nobody had to do that.",
+      },
+    ],
+  },
+];
+
+export const REPORT2_ROBOTS: ReportSection[] = [
+  {
+    eyebrow: "03 · The robot receipt",
+    heading: "The robots ride along here too, with one difference",
+    paras: [
+      {
+        text: 'The trades have bought the same automation the insurance industry has, and the same failure modes showed up. Instant acknowledgment texts and emails. An opt-in confirmation that arrived from a company that never followed with a person. One automated thank-you email greeted me with the words "Thanks for Contacting [company_name]!", the template variable sitting right there unfilled, a small monument to a tool nobody ever finished setting up. Another company\'s website popup thanked me for subscribing to deals. I had asked about a broken pipe.',
+      },
+      {
+        text: "But here is the difference worth stealing. At the best shops, the robot and the human arrived together. The instant text at 10:35, the coordinator at 10:37. The acknowledgment was a receipt, and the person was right behind it. In the insurance study, the instant reply was usually a stand-in for a person who came days later or never. In the best of the trades, it is a heads-up that a person is already moving.",
+      },
+    ],
+  },
+  {
+    eyebrow: "04 · The ceiling",
+    heading: "Two systems worth naming, no names attached",
+    paras: [
+      {
+        text: "One electrician's operation was the ceiling of the entire two-industry study. The website form booked me a visit for that same evening. A text told me which technician was coming and when. He showed up in the window, looked at the work, and the written estimate was in my phone seven minutes after he left. Form to priced work, same day, every handoff automatic. Nothing about it felt robotic, because a human did the work and the system did the chasing.",
+      },
+      {
+        text: "And one HVAC company did the single smartest thing I saw anywhere. I started their online booking wizard and abandoned it partway, the way real customers do constantly. Two days later the manager called me about the request I never finished submitting. Their system had captured the lead at the moment of abandonment instead of letting it evaporate. Every other company in both studies only ever saw the people who made it all the way through.",
+      },
+    ],
+  },
+];
+
+export const REPORT2_CLOSE: ReportSection[] = [
+  {
+    eyebrow: "05 · The math",
+    heading: "What the silence costs",
+    paras: [
+      {
+        text: "Conservative math, plainly labeled as estimates. The cast iron replacement I described runs somewhere between $8,000 and $15,000 in this market depending on scope. The electrical inspection is a smaller ticket, but it is attached to a house sale, which is where repair lists and upgrade work come from. These were not tire-kicker inquiries. They were the kind of jobs that make a contractor's month.",
+      },
+      {
+        text: "Thirty-one companies never found out those jobs existed. Not because they bid high or showed up late. Because a form on their own website emptied into a place nobody looks.",
+      },
+    ],
+  },
+  {
+    eyebrow: "06 · The mechanism",
+    heading: "Why this happens",
+    paras: [
+      {
+        text: "The barbell has a simple mechanism. In the shops that answered in minutes, the website form behaves like a ringing phone: it lands in a dispatch flow, somebody owns it, and it interrupts someone's Sunday. In the silent shops, the form behaves like mail: it lands in an inbox that gets checked when it gets checked, which on a Sunday is Monday and in practice is often never. Same industry, same tools available, opposite wiring.",
+      },
+      {
+        text: "The trades do not have an effort problem. A man returned my voicemail from his vacation backlog. They have a wiring problem, and only in one specific place: the quiet handoff between the website and a human being. The phone side of this industry could teach the insurance industry a clinic. The form side is where the buyer leaks out.",
+      },
+    ],
+  },
+  {
+    eyebrow: "07 · Homework",
+    heading: "The free 20-minute test, no vendor required",
+    paras: [
+      {
+        text: "This Sunday, fill out your own website's contact form the way a homeowner with a $10,000 problem would. Start a timer. Then have someone call your main line at 6pm on a weekday. Two questions decide everything: how long until a human touched the form, and where did that submission actually land, whose job was it?",
+      },
+      {
+        text: "If the phone test passes and the form test fails, you are normal for this industry, and you are also handing the easiest jobs in your market to whoever answers first. You do not have to beat everyone. You have to beat silence, and silence is most of your competition.",
+      },
+    ],
+  },
+];
+
+export const REPORT2_CLOSING: ReportSection[] = [
+  {
+    heading: "Method notes",
+    paras: [
+      {
+        text: "Same field standard as part one: honest counting, stated cutoffs, timestamped logs, raw data available on request. 49 companies received a clean, real inquiry on Sunday morning, August 9. A response means a human: a call, a text, or an email written by a person. Automated acknowledgments were tracked separately. Phone tier: 14 additional calls placed across a Monday business block and a Tuesday evening block. No company is named, in praise or in silence. One disclosure for symmetry with part one: this vertical produced one written estimate, which I reviewed and declined; unlike the insurance study, no purchase resulted.",
+        link: {
+          text: "the insurance study",
+          href: "/case-studies/dfw-insurance-response-study",
+        },
+      },
+    ],
+  },
+  {
+    heading: "What comes next",
+    paras: [
+      {
+        text: "The two-industry comparison is the point of the whole exercise, and it will get its own write-up: two sets of good people, two opposite front doors, and one identical gap where the buyer disappears. If you run a shop and want the full breakdown when it publishes, it will live here.",
+      },
+    ],
+  },
+];
+
+/* ------------------------------------------------------- barbell figure */
+export const BARBELL = {
+  eyebrow: "The distribution",
+  heading: "Fast or silent, almost nothing in between",
+  intro:
+    "Every contractor in the study, grouped by outcome. The responders arrived in minutes; the rest never arrived at all.",
+  fast: {
+    count: 18,
+    label: "Minutes",
+    caption: "Responded, most within minutes of the form or the next morning's first coffee",
+  },
+  middle: "Almost nobody in between",
+  never: {
+    count: 31,
+    label: "Never",
+    caption: "No human contact as of publication",
+  },
+  footnote:
+    "All counts from the study log. 49 companies inquired on Sunday, August 9; counts as of publication. Response times measured per company from its own send time.",
+} as const;
+
+/* ----------------------------------------------- after-hours comparison */
+export const AFTER_HOURS = {
+  eyebrow: "Same hour, two industries",
+  heading: "6pm, phones ringing in both industries",
+  a: {
+    label: "Trades shops · Tuesday ~6pm",
+    value: "6 of 8",
+    caption: "Answered live, a person picking up at dinner time",
+  },
+  b: {
+    label: "Insurance agencies · after hours",
+    value: "1 of 6",
+    caption: "One live answer, an owner picking up his own line",
+  },
+  caption:
+    "Both counts from the two field studies' phone tiers. A burst pipe is revenue; the trades wired urgency into their phones because emergencies taught them to.",
+} as const;
+
+/* --------------------------------------------------------- part two CTA */
+export const CTA2 = {
+  heading: "Want to know what a customer experiences with your business?",
+  button: "Book a free 30-minute call",
   buildItLiveLink: "I also build these systems live, in plain English.",
 } as const;

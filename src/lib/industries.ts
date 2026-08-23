@@ -69,7 +69,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       eyebrow: "For independent insurance agencies · DFW",
       h1: "Lead follow-up that answers in minutes, not on Monday.",
       dek: "Your producers are excellent on the phone. Your website form is where commercial accounts go quiet. We build the plumbing that connects the two, for independent agencies across Dallas and Fort Worth.",
-      cta: "Book a free walkthrough",
+      cta: "Book a free 30-minute walkthrough",
       secondary: {
         label: "Read the field study first",
         href: "/case-studies/dfw-insurance-response-study",
@@ -131,7 +131,7 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
       heading:
         "Want to know what a commercial buyer experiences when they ask your agency for a quote?",
       body: "A free walkthrough of your inquiry flow, on the phone or over coffee anywhere in DFW. You leave with the picture whether we work together or not.",
-      button: "Book a free walkthrough",
+      button: "Book a free 30-minute walkthrough",
     },
   },
   {

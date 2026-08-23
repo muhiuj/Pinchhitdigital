@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import {
+  CTA,
   REPORT_BIO,
   REPORT_CLOSING,
   REPORT_PHONE,
   REPORT_RESEARCH,
   REPORT_ROBOT,
   REPORT_TEST,
+  STUDY1_CROSSLINK,
+  STUDY_HERO,
   STUDY_SEO,
 } from "@/lib/case-studies";
 import { AuditTable } from "@/components/case-studies/AuditTable";
@@ -65,7 +68,7 @@ const articleSchema = {
 export default function DfwInsuranceResponseStudyPage() {
   return (
     <div className="bg-cream-50">
-      <StudyHero />
+      <StudyHero hero={STUDY_HERO} crossLink={STUDY1_CROSSLINK} />
 
       <div id="research" className="pt-[clamp(56px,9vw,96px)]">
         <Report sections={REPORT_RESEARCH} />
@@ -103,7 +106,7 @@ export default function DfwInsuranceResponseStudyPage() {
         <Report sections={REPORT_CLOSING} bio={REPORT_BIO} />
       </div>
 
-      <StudyCta />
+      <StudyCta cta={CTA} sectionPrefix="case-study" />
 
       <script
         type="application/ld+json"
