@@ -15,9 +15,8 @@ import { StickyCta } from "@/components/build-it-live/StickyCta";
 // /build-it-live — Session 002: "Can ChatGPT Find Your Business?" Same
 // route, same registration mechanism (custom form → /api/webinar-register →
 // n8n WF1). Session facts render live from the BIL Sessions Notion row
-// (ISR); src/lib/webinars.ts holds the copy and fallbacks.
-// ⚠️ og:image below is still the Session 001 card until Jeremy exports the
-// Session 002 art; swap the file at public/build-it-live/event-card.jpg.
+// (ISR); src/lib/webinars.ts holds the copy and fallbacks. og:image is the
+// Session 002 card (swap public/build-it-live/event-card.jpg each session).
 
 export const revalidate = 300;
 
