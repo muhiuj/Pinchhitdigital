@@ -165,6 +165,21 @@ export const PAST_SESSIONS: WebinarSession[] = [
   },
 ];
 
+/* ------------------------------------------- 06 · SPREAD THE WORD */
+// The event card art earns a spot on the page here, framed as a poster to
+// pass along rather than hero decoration (the hero's right column is the
+// form on purpose).
+export const SHARE_SECTION = {
+  eyebrow: "06 · Spread the word",
+  heading: "Know someone who should see this?",
+  body: "Build It Live is free every month. If you know a business owner who wonders how AI sees them, send this along and they can grab a seat in about 30 seconds.",
+  cta: "Copy the link",
+  ctaCopied: "Link copied",
+  shareUrl: "https://www.pinchhitdigital.com/build-it-live",
+  cardAlt:
+    "Build It Live session two event card: Can ChatGPT Find Your Business?",
+} as const;
+
 /* ---------------------------------------------------------- FINAL CTA */
 export const FINAL_CTA = {
   line: "One free hour. You leave knowing whether AI can find your business, and what to fix if it can't.",

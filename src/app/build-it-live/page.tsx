@@ -10,6 +10,7 @@ import {
   Teacher,
 } from "@/components/build-it-live/Session2Sections";
 import { SessionTwoReplay } from "@/components/build-it-live/SessionTwoReplay";
+import { ShareSession } from "@/components/build-it-live/ShareSession";
 import { StickyCta } from "@/components/build-it-live/StickyCta";
 
 // /build-it-live — Session 002: "Can ChatGPT Find Your Business?" Same
@@ -94,6 +95,7 @@ export default async function BuildItLivePage() {
       <Takeaway />
       <Teacher />
       <SessionTwoReplay />
+      <ShareSession />
       <FinalCta />
       <StickyCta />
 
