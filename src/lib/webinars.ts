@@ -1,74 +1,70 @@
-// Single source of truth for the /build-it-live page: next-session data,
-// past-session archive, and every rendered copy string. Hero, cost, and
-// agenda copy is verbatim from Jeremy's final copy doc (2026-07-21), with
-// one approved adjustment: the session runs at 2:00 PM Central, not 11:30 AM.
-// Brand rules: ZERO em dashes, never the word "webinar" in rendered copy
-// (it is a "live build" or "session"), no hype adjectives, no exclamation
-// points, every statistic names its third-party source in-copy.
+// Single source of truth for the /build-it-live page: session data, the
+// replay archive, and every rendered copy string. Session 002 copy is
+// verbatim from Jeremy's build prompt (2026-09-08). Brand rules: ZERO em
+// dashes, no hype adjectives, no exclamation points, the one provided
+// statistic keeps its attribution attached; do not add statistics.
 //
 // THE MONTHLY EDIT POINT: update NEXT_SESSION for each new session and move
-// the finished one into PAST_SESSIONS once its edited replay is on YouTube.
-
-export { BOOKING_URL } from "./audit";
+// the finished one into PAST_SESSIONS once its replay is on YouTube. The
+// live session facts (dates, calendar link, JSON-LD) come from the BIL
+// Sessions Notion row at request time; these values are the fallback.
 
 export const FOUNDER_EMAIL = "jeremy.muhiu@pinchhitdigital.com";
 
 /* ---------------------------------------------------------------- SEO */
 export const SEO = {
-  title:
-    "Build It Live | Free Monthly Automation Webinar for DFW Business Owners | Pinch Hit Digital",
+  title: "Can ChatGPT Find Your Business? Free Live Webinar | Pinch Hit Digital",
   description:
-    "Watch a $3,000 missed-call text-back system get built from scratch, free and live, in plain English. Follow along with your team and take the recipe home. Registrants get the full recording.",
+    "Free live session, Tue Sep 29 at 11:30 AM CT. Watch real AI searches for local businesses, learn why the winners get recommended, and leave with a five-minute self-audit.",
   slug: "/build-it-live",
   canonical: "https://www.pinchhitdigital.com/build-it-live",
 } as const;
 
 /* ------------------------------------------------------ NEXT SESSION */
 // startIso/endIso drive the Event JSON-LD and the Google Calendar link.
-// Aug 18 2026 is CDT (UTC-5): 2:00 PM Central = 19:00 UTC.
+// Sep 29 2026 is CDT (UTC-5): 11:30 AM Central = 16:30 UTC.
 export const NEXT_SESSION = {
-  id: "2026-08-build-it-live",
-  number: 1,
-  title: "The $3,000 Text-Back System",
-  topicBuild: "a missed-call text-back system",
-  startIso: "2026-08-18T14:00:00-05:00",
-  endIso: "2026-08-18T14:50:00-05:00",
-  dateLong: "Tuesday, August 18",
-  timeLabel: "2:00 PM Central",
+  id: "2026-09-build-it-live",
+  number: 2,
+  title: "Can ChatGPT Find Your Business?",
+  topicBuild: "a live AI search audit of local businesses",
+  startIso: "2026-09-29T11:30:00-05:00",
+  endIso: "2026-09-29T12:20:00-05:00",
+  dateLong: "Tuesday, September 29",
+  timeLabel: "11:30 AM Central",
 } as const;
 
-// Google Calendar quick-add URL (times in UTC). The Zoom join link is not on
-// the site by design: n8n emails it, so the invite points people at their inbox.
 const GCAL_TEXT = encodeURIComponent(`Build It Live: ${NEXT_SESSION.title}`);
 const GCAL_DETAILS = encodeURIComponent(
-  "Watch a missed-call text-back system get built from scratch in 30 minutes, in plain English. Your join link arrives by email before the session.\n\nhttps://www.pinchhitdigital.com/build-it-live",
+  "Watch real AI searches for local businesses, live and in plain English. Your join link arrives by email before the session.\n\nhttps://www.pinchhitdigital.com/build-it-live",
 );
-export const GCAL_URL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${GCAL_TEXT}&dates=20260818T190000Z/20260818T195000Z&details=${GCAL_DETAILS}`;
+export const GCAL_URL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${GCAL_TEXT}&dates=20260929T163000Z/20260929T172000Z&details=${GCAL_DETAILS}`;
 
 /* ---------------------------------------------------------------- HERO */
 export const HERO = {
-  eyebrow: "Build It Live · free monthly live build · online",
-  // H1 rendered in the component (serif accent on "$3,000").
+  badge: "Live webinar",
+  // H1 rendered in the component (serif accent on "Your Business?").
   subhead:
-    "Agencies charge about $3,000 to build a missed-call text-back system: it answers every call your business misses, by text, in seconds. Watch one get built from scratch, live, in plain English. Follow along, test it from your own phone, and take the recipe home.",
-  priceNote:
-    "$3,000 is a typical agency price for a done-for-you build like this one.",
+    "45% of customers now use AI tools like ChatGPT to decide who to hire, up from 6% a year ago (BrightLocal, 2026). In this free session I run real searches live, break down why AI recommends the businesses it does, and hand you a five-minute check you can run on your own business.",
   eventLine: `${NEXT_SESSION.dateLong} · ${NEXT_SESSION.timeLabel} · 50 minutes · online & recorded`,
   cta: "Save my spot, it's free",
   ctaNote:
-    "Built for owner-operated teams of fewer than 50 people. Can't make it live? Register anyway and the full recording comes to you.",
+    "Free, online, recorded. Can't make it live? Register anyway and the replay comes to your inbox.",
 } as const;
 
 /* ---------------------------------------------------------------- FORM */
 export const FORM = {
+  heading: "Save your spot",
   firstNameLabel: "First name",
   emailLabel: "Email",
   phoneLabel: "Mobile",
   // The payoff, never "(optional)": the phone field earns its keep.
-  phonePayoff: "Get your join link by text 15 minutes before we start.",
-  restaurantLabel: "Business or organization name (optional)",
-  // Carrier-reviewable consent language (spec addendum, verbatim). The two
-  // policy links render after this sentence in the component.
+  phonePayoff: "I'll text you the join link 15 minutes before we start.",
+  businessLabel: "Business name (optional)",
+  businessPayoff:
+    "Optional. Run a business? Add the name and I'll take a look at how AI sees it.",
+  // Carrier-reviewable consent language (A2P campaign opt-in evidence,
+  // verbatim; the two policy links render after this sentence).
   consentText:
     "Text me my join link and up to 4 event reminders per session from Pinch Hit Digital. Message and data rates may apply. Reply STOP to opt out, HELP for help.",
   consentError:
@@ -98,141 +94,81 @@ export const FORM = {
     "We couldn't send a verification text just now, so your reminders and join link will come by email instead.",
 } as const;
 
-/* -------------------------------------------------- 01 · THE MATH */
-export interface MathStat {
-  value: string;
-  label: string;
-  sourceName: string;
-  sourceUrl: string;
-}
-
-export const MATH = {
-  eyebrow: "01 · Decide if it's worth your hour",
-  h2: "First, the math. Yours, not ours.",
-  lede: "A missed-call system only matters if your business misses calls that carry money. So the session starts there, with two facts and one line of arithmetic.",
-  stats: [
-    {
-      value: "62%",
-      label:
-        "of calls to small businesses go unanswered, in one study of test calls",
-      sourceName: "Source: 411 Locals",
-      sourceUrl:
-        "https://411locals.us/small-business-owners-dont-answer-62-of-phone-calls/",
-    },
-    {
-      value: "21×",
-      label:
-        "more likely to qualify: leads contacted within 5 minutes versus leads that wait 30",
-      sourceName: "Source: Lead Response Management study",
-      sourceUrl: "https://www.leadresponsemanagement.org/lrm_study",
-    },
-  ] as MathStat[],
-  closing:
-    "The arithmetic is one line: your average sale, times the calls you miss in a week. A plumbing company and an art studio get very different answers, and that is the point. If your number is small, you'll know this build is not for you, and the hour cost you nothing. If it isn't, you'll watch the fix get built in front of you.",
+/* ---------------------------------- 01 · LIVE-SEARCH INVITATION */
+export const INVITE = {
+  eyebrow: "01 · Bring your industry",
+  heading: "Your industry, searched live.",
+  body: "We open the session with searches from the room. Show up live, drop your industry in the chat, and watch who AI recommends when a customer in your area asks. Watching on the replay? The same searches work on your phone, and I'll give you the exact prompts.",
 } as const;
 
-/* -------------------------------------------------- 02 · THE AGENDA */
-export interface AgendaItem {
-  time: string;
-  text: string;
-}
-
-export const AGENDA = {
-  eyebrow: "02 · The agenda",
-  h2: "What happens in the 50 minutes",
+/* ------------------------------------------- 02 · WHAT WE'LL COVER */
+export const COVER = {
+  eyebrow: "02 · What we'll cover",
+  heading: "What we'll cover",
   items: [
     {
-      time: "0:00",
-      text: "The evaluation. Does this system make sense for your business? We run the math with your numbers, on screen, and you decide whether to build along or just watch.",
+      title: "The new front door.",
+      body: "The same customer question, asked three ways: ChatGPT, Google's AI answer, and the classic map results. Different names win each one, and I'll show you why.",
     },
     {
-      time: "0:08",
-      text: "Tool sign-up. We create the two accounts the system runs on, together. A short sign-up guide arrives by email before the session so you can show up with them ready.",
+      title: "Why the winners win.",
+      body: "We take a recommended business apart piece by piece: reviews, Google Business Profile, website, and mentions around the web. The checklist builds on screen as we go.",
     },
     {
-      time: "0:15",
-      text: "The live build. A missed-call text-back system, built from a blank screen, every step narrated in plain language.",
+      title: "A real fix, live.",
+      body: "I make one change to a real business profile on screen, so you can see that most of these fixes take minutes, not budgets.",
     },
-    {
-      time: "0:38",
-      text: "The test. We call the number, let the call miss, and watch the text-back land in seconds.",
-    },
-    {
-      time: "0:42",
-      text: "Q&A. Bring the awkward questions. They are the useful ones.",
-    },
-    {
-      time: "0:48",
-      text: "One offer, stated once. A free digital systems audit for anyone who wants help finding what to automate next. That's the whole pitch, and it's the only one.",
-    },
-  ] as AgendaItem[],
+  ],
 } as const;
 
-/* -------------------------------------------------- 03 · WHO IT'S FOR */
-export const WHO = {
-  eyebrow: "03 · Who this is for",
-  h2: "Built for owners, not developers.",
-  body: "Build It Live is for owner-operated organizations of fewer than 50 people: the shops, offices, and studios where whoever answers the phone is also doing the work. No technical background is needed. Every step gets narrated in plain language, and when a technical term shows up, a plain-English explanation follows in the same breath. If you can follow a recipe, you can follow the build.",
+/* -------------------------------------------- 03 · WHAT YOU LEAVE WITH */
+export const TAKEAWAY = {
+  eyebrow: "03 · What you leave with",
+  heading: "What you leave with",
+  body: "The five exact prompts I use, plus a ten-point scorecard. Together they let you audit your own business in about five minutes. Dropped in the chat during the session, free, and included with the replay.",
 } as const;
 
-/* -------------------------------------------------- 04 · PAST SESSIONS */
+/* ------------------------------------------------- 04 · WHO'S TEACHING */
+export const TEACHER = {
+  eyebrow: "04 · Who's teaching",
+  heading: "Who's teaching",
+  body: "I'm Jeremy Muhiu. I've spent close to a decade building local search campaigns, starting with more than 100 DFW businesses across dozens of industries at one of the country's largest local marketing companies. AI changed where customers ask. It hasn't changed what earns the recommendation, and that's what this session teaches.",
+} as const;
+
+/* --------------------------------------- 05 · LAST SESSION'S PROOF */
 export interface WebinarSession {
-  id: string; // "2026-08-build-it-live"
-  number: number; // Session 001, 002…
+  id: string;
+  number: number;
   title: string;
   date: string; // ISO
-  youtubeId?: string; // absent until the edited replay is up
-  result: string; // one-line outcome shown on the banner
-  coverImage?: string; // /webinars/…jpg; falls back to the YouTube thumbnail
+  youtubeId?: string; // set when the replay is on YouTube
+  result: string;
 }
 
-export const RECORDING = {
-  eyebrow: "04 · Can't make it live?",
-  h2: "Register anyway. The recording comes to you.",
-  body: "Every registrant gets the full recording after the session, whether or not they attend. That is deliberate: the build is meant to be paused, replayed, and copied at your own speed. The recording goes to registrants only and is not posted publicly, so save your spot even if the time doesn't work.",
+export const REPLAY_SECTION = {
+  eyebrow: "05 · Last session's proof",
+  heading: "This is session two.",
+  body: "In session one I built a missed-call text-back system live, from nothing, in about 30 minutes. Watch the replay and you'll know exactly what to expect.",
 } as const;
 
-// Archive starts empty for Session #1. After each session: upload the edited
-// replay to YouTube, then add an entry here with the youtubeId.
-export const PAST_SESSIONS: WebinarSession[] = [];
-
-/* ---------------------------------------------------------------- 05 · FAQ */
-export const FAQ_SECTION = {
-  eyebrow: "05 · Straight answers",
-  h2: "Questions owners actually ask",
-} as const;
-
-export const FAQ_ITEMS = [
+// Set youtubeId when Jeremy supplies the Session 001 replay video ID; the
+// embed hides until it exists (copy still renders).
+export const PAST_SESSIONS: WebinarSession[] = [
   {
-    q: "Is it really free?",
-    a: "Yes. The session is free, the recording is free for registrants, and the recipe is yours to keep. The business behind it runs on the free digital systems audit, and that gets one mention at the end of the hour, stated as plainly as it is here.",
+    id: "2026-08-build-it-live",
+    number: 1,
+    title: "The $3,000 Text-Back System",
+    date: "2026-08-18",
+    youtubeId: "dYhdKvqRGX8",
+    result:
+      "A missed-call text-back system, built live from nothing in about 30 minutes.",
   },
-  {
-    q: "Do I need to be technical?",
-    a: "No. Every step is narrated in plain language, and every technical term gets a plain-English explanation the moment it appears. If you can follow a recipe, you can follow the build.",
-  },
-  {
-    q: "What if I can't attend live?",
-    a: "Register anyway. The full recording goes to every registrant after the session. It is not posted publicly, so registering is the only way to get it.",
-  },
-  {
-    q: "What does the system cost to run?",
-    a: "The session is free, and so is the recipe. The system itself runs on two tools with small subscriptions: a few dollars a month for the phone number and texts, plus the automation tool's starter plan. We put the exact numbers on screen during the build so you can decide with real figures.",
-  },
-  {
-    q: "What's the catch?",
-    a: "There isn't one hiding. At the end I mention the free digital systems audit, once, for anyone who wants help finding what to automate next. That mention is the entire pitch. The session is meant to be useful whether or not you ever book anything.",
-  },
-] as const;
+];
 
 /* ---------------------------------------------------------- FINAL CTA */
 export const FINAL_CTA = {
-  eyebrow: "Save your spot",
-  // h2 rendered in the component with the live date.
-  body: "Fifty minutes, one working system, and a single mention of the free digital systems audit at the end. Registration takes two fields and about fifteen seconds, and the full recording comes to you whether or not you make it live.",
+  line: "One free hour. You leave knowing whether AI can find your business, and what to fix if it can't.",
   cta: "Save my spot, it's free",
-  auditLead: "Rather talk through your systems first?",
-  auditLink: "Book a free 30-minute digital systems audit.",
 } as const;
 
 /* ---------------------------------------------------------- STICKY CTA */

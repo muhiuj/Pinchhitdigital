@@ -363,6 +363,10 @@ export function RegisterForm({ gcalUrl = GCAL_URL }: RegisterFormProps = {}) {
         />
       </div>
 
+      <h2 className="mb-5 font-display text-2xl font-extrabold tracking-[-0.02em] text-cream-50">
+        {FORM.heading}
+      </h2>
+
       <div className="grid gap-4">
         <div>
           <label htmlFor="bil-first-name" className={labelClass}>
@@ -436,8 +440,11 @@ export function RegisterForm({ gcalUrl = GCAL_URL }: RegisterFormProps = {}) {
 
         <div>
           <label htmlFor="bil-restaurant" className={labelClass}>
-            {FORM.restaurantLabel}
+            {FORM.businessLabel}
           </label>
+          <p className="mb-1.5 font-sans text-[13px] leading-snug text-body-dim">
+            {FORM.businessPayoff}
+          </p>
           <input
             id="bil-restaurant"
             name="organization"
