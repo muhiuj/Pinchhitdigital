@@ -236,6 +236,20 @@ export const PAST_SESSIONS: WebinarSession[] = [
   },
 ];
 
+/* ------------------------------------------- 08 · SPREAD THE WORD */
+// The event card art as a poster to pass along (the hero's right column
+// stays the form on purpose).
+export const SHARE_SECTION = {
+  eyebrow: "08 · Spread the word",
+  heading: "Know someone who should see this?",
+  body: "Build It Live is free every month. If you know a business owner whose calendar is full but whose goals are not moving, send this along and they can grab a seat in about 30 seconds.",
+  cta: "Copy the link",
+  ctaCopied: "Link copied",
+  shareUrl: "https://www.pinchhitdigital.com/build-it-live",
+  cardAlt:
+    "Build It Live session two event card: Build Your Own AI Assistant with Claude, Attio, and Google Calendar",
+} as const;
+
 /* ---------------------------------------------------------- FINAL CTA */
 export const FINAL_CTA = {
   line: "50 free minutes. Watch the assistant get built, then go set up your own.",

@@ -12,16 +12,16 @@ import {
 import { FinalCta } from "@/components/build-it-live/FinalCta";
 import { Hero } from "@/components/build-it-live/Hero";
 import { SessionOneReplay } from "@/components/build-it-live/SessionOneReplay";
+import { ShareSession } from "@/components/build-it-live/ShareSession";
 import { StickyCta } from "@/components/build-it-live/StickyCta";
 
 // /build-it-live — Session 002: "Build Your Own AI Assistant with Claude,
 // Attio, and Google Calendar" (the 2026-09-22 pivot). Same route, same
 // registration mechanism (custom form → /api/webinar-register → n8n WF1).
 // Session facts render live from the BIL Sessions Notion row (ISR);
-// src/lib/webinars.ts holds the copy and fallbacks.
-// ⚠️ No og:image on purpose: the old card art named the retired topic.
-// Re-add the image block (and a share section if wanted) when the new
-// collateral kit lands at public/build-it-live/event-card.jpg.
+// src/lib/webinars.ts holds the copy and fallbacks. og:image is the
+// Session 002 amber card (swap public/build-it-live/event-card.jpg each
+// session).
 
 export const revalidate = 300;
 
@@ -34,11 +34,20 @@ export const metadata: Metadata = {
     description: SEO.description,
     url: SEO.canonical,
     type: "website",
+    images: [
+      {
+        url: "https://www.pinchhitdigital.com/build-it-live/event-card.jpg",
+        width: 1080,
+        height: 1080,
+        alt: "Build It Live session two: Build Your Own AI Assistant with Claude, Attio, and Google Calendar",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: SEO.title,
     description: SEO.description,
+    images: ["https://www.pinchhitdigital.com/build-it-live/event-card.jpg"],
   },
 };
 
@@ -102,6 +111,7 @@ export default async function BuildItLivePage() {
       <WhoFor />
       <Faq />
       <SessionOneReplay />
+      <ShareSession />
       <FinalCta />
       <StickyCta />
 
