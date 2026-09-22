@@ -23,11 +23,12 @@ export function Hero({ eventLine = HERO.eventLine, gcalUrl }: HeroProps) {
             {HERO.badge}
           </span>
 
-          <h1 className="mt-5 font-display text-[36px] font-extrabold leading-[1.05] tracking-[-0.02em] text-cream-50 sm:text-5xl lg:text-[54px]">
-            Can ChatGPT Find{" "}
+          <h1 className="mt-5 font-display text-[34px] font-extrabold leading-[1.06] tracking-[-0.02em] text-cream-50 sm:text-[44px] lg:text-[48px]">
+            Build Your Own{" "}
             <span className="font-serif text-[1.08em] italic text-teal-400">
-              Your Business?
-            </span>
+              AI Assistant
+            </span>{" "}
+            with Claude, Attio, and Google Calendar
           </h1>
 
           <p className="mt-6 max-w-[54ch] font-sans text-base leading-relaxed text-body sm:text-lg">

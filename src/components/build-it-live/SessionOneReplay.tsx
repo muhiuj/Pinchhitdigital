@@ -6,22 +6,25 @@ import { useState } from "react";
 import { Eyebrow, Section } from "@/components/catering/primitives";
 import { PAST_SESSIONS, REPLAY_SECTION } from "@/lib/webinars";
 
-// 05 · Last session's proof. Facade pattern, non-negotiable for
-// performance: the page ships only the YouTube thumbnail; the
-// youtube-nocookie iframe is injected in place on click. Zero YouTube JS
-// before user intent. Hides the player (keeps the copy) if no video ID.
+// 07 · Session 001 replay, below the fold per the rebuild prompt. Facade
+// pattern, non-negotiable for performance: the page ships only the YouTube
+// thumbnail; the youtube-nocookie iframe is injected in place on click.
+// Zero YouTube JS before user intent. Hides the player (keeps the copy) if
+// no video ID.
 
-export function SessionTwoReplay() {
+export function SessionOneReplay() {
   const [playing, setPlaying] = useState(false);
   const session = PAST_SESSIONS[0];
   const hasVideo = Boolean(session?.youtubeId);
 
   return (
     <Section id="session-one-replay" tone="surface">
-      <Eyebrow n="05" label="Last session's proof" />
+      <Eyebrow n="07" label="Session 001 replay" />
       <h2 className="mt-5 font-display text-3xl font-extrabold tracking-[-0.02em] text-cream-50 md:text-4xl">
-        This is session{" "}
-        <span className="font-serif italic text-teal-400">two</span>.
+        Session 001:{" "}
+        <span className="font-serif italic text-teal-400">
+          the missed-call text-back build
+        </span>
       </h2>
       <p className="mt-6 max-w-[68ch] font-sans text-base leading-relaxed text-body sm:text-lg">
         {REPLAY_SECTION.body}
