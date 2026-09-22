@@ -41,6 +41,38 @@ type WebhookPayload = {
   source: "site";
 };
 
+// Notion rejects select values whose option doesn't exist yet (it does NOT
+// auto-create them), so the first registrant of a new monthly session_key
+// would silently fail the write. Append the option, then the caller
+// retries. The update REPLACES the whole option set, so the existing
+// options must be fetched and resent or they (and their values on old
+// rows) are wiped.
+async function ensureSessionOption(
+  notion: Client,
+  dsId: string,
+  sessionKey: string,
+) {
+  const ds = (await notion.dataSources.retrieve({
+    data_source_id: dsId,
+  })) as {
+    properties?: {
+      Session?: { select?: { options?: Array<{ name: string }> } };
+    };
+  };
+  // Pass the retrieved option objects through untouched (they carry their
+  // ids and colors at runtime), appending only the new key.
+  const existing = ds.properties?.Session?.select?.options ?? [];
+  if (existing.some((o) => o.name === sessionKey)) return;
+  await notion.dataSources.update({
+    data_source_id: dsId,
+    properties: {
+      Session: {
+        select: { options: [...existing, { name: sessionKey }] },
+      },
+    },
+  });
+}
+
 async function writeNotionRow(payload: WebhookPayload) {
   const notionKey = process.env.NOTION_API_KEY;
   const dbId = process.env.NOTION_WEBINAR_SIGNUPS_DB_ID;
@@ -48,70 +80,93 @@ async function writeNotionRow(payload: WebhookPayload) {
   try {
     const notion = new Client({ auth: notionKey });
     const sessionKey = (await getLiveSession()).sessionKey;
+    const dsId = await resolveDataSourceId(notion, dbId);
 
     // Dedupe: same email + same session updates the existing row instead of
     // creating a second one. Fields only upgrade (a later email-only
-    // registration never wipes an already-verified phone).
-    const dsId = await resolveDataSourceId(notion, dbId);
-    let existingId: string | null = null;
-    if (dsId) {
-      const existing = (await notion.dataSources.query({
-        data_source_id: dsId,
-        filter: {
-          and: [
-            { property: "Email", email: { equals: payload.email } },
-            { property: "Session", select: { equals: sessionKey } },
-          ],
-        },
-        page_size: 1,
-      })) as { results: Array<{ id: string }> };
-      existingId = existing.results[0]?.id ?? null;
-    }
+    // registration never wipes an already-verified phone). Both the dedupe
+    // filter and the create reject a session_key option that doesn't exist
+    // yet, so the whole upsert retries once after appending the option.
+    const upsert = async () => {
+      let existingId: string | null = null;
+      if (dsId) {
+        const existing = (await notion.dataSources.query({
+          data_source_id: dsId,
+          filter: {
+            and: [
+              { property: "Email", email: { equals: payload.email } },
+              { property: "Session", select: { equals: sessionKey } },
+            ],
+          },
+          page_size: 1,
+        })) as { results: Array<{ id: string }> };
+        existingId = existing.results[0]?.id ?? null;
+      }
 
-    if (existingId) {
-      await notion.pages.update({
-        page_id: existingId,
+      if (existingId) {
+        await notion.pages.update({
+          page_id: existingId,
+          properties: {
+            Name: { title: [{ text: { content: payload.first_name } }] },
+            // Re-registering always puts the person back in the reminder
+            // audience, even if a prior row was marked No-show.
+            Status: { select: { name: "Registered" } },
+            ...(payload.restaurant
+              ? { Restaurant: { rich_text: [{ text: { content: payload.restaurant } }] } }
+              : {}),
+            ...(payload.phone
+              ? {
+                  Phone: { phone_number: payload.phone },
+                  "SMS Consent": { checkbox: payload.sms_consent },
+                  "Phone Verified": { checkbox: payload.phone_verified },
+                }
+              : {}),
+          },
+        });
+        return;
+      }
+
+      await notion.pages.create({
+        parent: { database_id: dbId },
         properties: {
           Name: { title: [{ text: { content: payload.first_name } }] },
-          // Re-registering always puts the person back in the reminder
-          // audience, even if a prior row was marked No-show.
+          Email: { email: payload.email },
+          ...(payload.phone ? { Phone: { phone_number: payload.phone } } : {}),
+          Restaurant: {
+            rich_text: payload.restaurant
+              ? [{ text: { content: payload.restaurant } }]
+              : [],
+          },
+          "SMS Consent": { checkbox: payload.sms_consent },
+          "Phone Verified": { checkbox: payload.phone_verified },
           Status: { select: { name: "Registered" } },
-          ...(payload.restaurant
-            ? { Restaurant: { rich_text: [{ text: { content: payload.restaurant } }] } }
-            : {}),
-          ...(payload.phone
-            ? {
-                Phone: { phone_number: payload.phone },
-                "SMS Consent": { checkbox: payload.sms_consent },
-                "Phone Verified": { checkbox: payload.phone_verified },
-              }
-            : {}),
+          Session: { select: { name: sessionKey } },
+          Source: { select: { name: "Site" } },
+          "Registered At": { date: { start: new Date().toISOString() } },
         },
       });
-      return;
-    }
+    };
 
-    await notion.pages.create({
-      parent: { database_id: dbId },
-      properties: {
-        Name: { title: [{ text: { content: payload.first_name } }] },
-        Email: { email: payload.email },
-        ...(payload.phone ? { Phone: { phone_number: payload.phone } } : {}),
-        Restaurant: {
-          rich_text: payload.restaurant
-            ? [{ text: { content: payload.restaurant } }]
-            : [],
-        },
-        "SMS Consent": { checkbox: payload.sms_consent },
-        "Phone Verified": { checkbox: payload.phone_verified },
-        Status: { select: { name: "Registered" } },
-        Session: { select: { name: sessionKey } },
-        Source: { select: { name: "Site" } },
-        "Registered At": { date: { start: new Date().toISOString() } },
-      },
-    });
+    try {
+      await upsert();
+    } catch (error) {
+      const missingOption =
+        dsId &&
+        error instanceof Error &&
+        /select option .* not found/i.test(error.message);
+      if (!missingOption) throw error;
+      await ensureSessionOption(notion, dsId, sessionKey);
+      await upsert();
+    }
   } catch (error) {
+    // A lost Notion row means a registrant the reminder engine never sees,
+    // so this failure must reach a human even though the visitor still
+    // hears yes.
     console.error("webinar-register: Notion write failed:", error);
+    await notifyFallback(
+      payload,
+      `Notion write failed: ${error instanceof Error ? error.message : "unknown"}`,
+    );
   }
 }
 
@@ -129,8 +184,8 @@ async function notifyFallback(payload: WebhookPayload, reason: string) {
       body: JSON.stringify({
         from: FROM_EMAIL,
         to: [toEmail],
-        subject: `Build It Live registrant (webhook failed): ${payload.first_name}`,
-        text: `The n8n webhook did not accept this registration. Add them by hand.\n\nReason: ${reason}\n\n${JSON.stringify(payload, null, 2)}`,
+        subject: `Build It Live registrant needs a manual check: ${payload.first_name}`,
+        text: `Part of the registration pipeline failed for this person. Check the Notion row and n8n execution, and add whatever is missing by hand.\n\nReason: ${reason}\n\n${JSON.stringify(payload, null, 2)}`,
       }),
     });
     if (!res.ok) {
