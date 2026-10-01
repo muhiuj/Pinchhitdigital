@@ -4,41 +4,12 @@ import { Check, Link as LinkIcon } from "lucide-react";
 import posthog from "posthog-js";
 import { useState } from "react";
 import { Eyebrow, Section } from "@/components/catering/primitives";
+import { copyToClipboard } from "@/lib/clipboard";
 import { NEXT_SESSION, SHARE_SECTION } from "@/lib/webinars";
 
 // 08 · Spread the word. The Session 002 event card as a poster with a
 // share affordance: native share sheet where the browser has one,
 // clipboard copy otherwise, and the visible URL as the last resort.
-
-// Clipboard with fallbacks: the async API needs a permission some embedded
-// browsers deny, so a failed write retries via a hidden textarea and
-// execCommand before giving up.
-function copyToClipboard(text: string): Promise<boolean> {
-  const legacy = () => {
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.position = "fixed";
-    ta.style.opacity = "0";
-    document.body.appendChild(ta);
-    ta.select();
-    let ok = false;
-    try {
-      ok = document.execCommand("copy");
-    } catch {
-      ok = false;
-    }
-    document.body.removeChild(ta);
-    return ok;
-  };
-  if (navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text).then(
-      () => true,
-      () => legacy(),
-    );
-  }
-  return Promise.resolve(legacy());
-}
 
 export function ShareSession() {
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
